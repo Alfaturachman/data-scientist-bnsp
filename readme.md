@@ -127,43 +127,6 @@ Seluruh pengerjaan notebook pada repositori ini dirancang untuk mematuhi **Stand
 
 ---
 
-## Panduan Instalasi & Cara Menjalankan
-
-### Prerequisites
-
-Pastikan Anda memiliki Python 3.9+ dan pip terinstal di sistem Anda.
-
-### 1. Kloning Repositori
-
-```bash
-git clone https://github.com/Alfaturachman/data-scientist-bnsp.git
-cd data-scientist-bnsp
-```
-
-### 2. Instalasi Dependensi
-
-Instal pustaka-pustaka Python yang diperlukan untuk menjalankan seluruh notebook eksperimen:
-
-```bash
-pip install numpy pandas matplotlib seaborn scikit-learn xgboost lightgbm optuna ipykernel
-```
-
-### 3. Menjalankan Notebook Jupyter
-
-Untuk menjalankan dan mengulas kode pemodelan:
-
-```bash
-jupyter notebook
-```
-
-Pilih salah satu folder proyek (misalnya `diabetes/Diabetes_Prediction.ipynb`) untuk melihat seluruh tahapan eksekusi dan output sel.
-
-### 4. Membuka Dashboard Infografis
-
-Cukup buka berkas `index.html` langsung dari file explorer Anda ke browser pilihan Anda (Chrome, Safari, Firefox, Edge).
-
----
-
 ## Lisensi
 
 Repositori ini dilisensikan di bawah **MIT License** - lihat berkas [LICENSE](LICENSE) untuk detail lebih lanjut. Seluruh dataset bersumber dari data publik UCI Machine Learning Repository dan Kaggle.
