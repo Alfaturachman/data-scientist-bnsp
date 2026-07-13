@@ -15,14 +15,14 @@ Paper ini membahas tentang rancangan pipeline machine learning yang aman dari ke
 
 ## 2. Informasi Bibliografis
 
-| Atribut          | Detail                                                                                         |
-| ---------------- | ---------------------------------------------------------------------------------------------- |
-| **Judul**        | Diabetes Prediction on Pima Indians Dataset Using Machine Learning Techniques                   |
-| **Penulis**      | Abdelmgeid A. Ali¹, Galal R. Galal², Hassan S. Hassan³                                         |
-| **Afiliasi**     | Faculty of Computers and Information, Minia University, Minia 61519, Egypt                     |
-| **Tahun**        | 2025                                                                                           |
-| **Jurnal**       | International Journal of Electrical Systems and Information Technology (Scopus Q3)             |
-| **Status Akses** | Open Access                                                                                    |
+| Atribut          | Detail                                                                             |
+| ---------------- | ---------------------------------------------------------------------------------- |
+| **Judul**        | Diabetes Prediction on Pima Indians Dataset Using Machine Learning Techniques      |
+| **Penulis**      | Abdelmgeid A. Ali¹, Galal R. Galal², Hassan S. Hassan³                             |
+| **Afiliasi**     | Faculty of Computers and Information, Minia University, Minia 61519, Egypt         |
+| **Tahun**        | 2025                                                                               |
+| **Jurnal**       | International Journal of Electrical Systems and Information Technology (Scopus Q3) |
+| **Status Akses** | Open Access                                                                        |
 
 ---
 
@@ -31,7 +31,7 @@ Paper ini membahas tentang rancangan pipeline machine learning yang aman dari ke
 Pipeline eksperimental yang diusulkan oleh penulis terdiri dari langkah-langkah terstruktur berikut:
 
 1. **Pembagian Data (Stratified Split)**: Pembagian data 80% pelatihan (614 sampel) dan 20% pengujian (154 sampel) menggunakan stratified sampling untuk menjaga distribusi kelas target (Outcome: 0 = sehat, 1 = diabetes).
-2. **Missing-Data Imputation**: Nilai nol tidak logis pada kolom `Glucose`, `BloodPressure`, `SkinThickness`, `Insulin`, dan `BMI` diganti dengan `NaN` dan diimputasi menggunakan median kelas. Untuk mencegah kebocoran data (*data leakage*), proses ini di-fit hanya menggunakan training set.
+2. **Missing-Data Imputation**: Nilai nol tidak logis pada kolom `Glucose`, `BloodPressure`, `SkinThickness`, `Insulin`, dan `BMI` diganti dengan `NaN` dan diimputasi menggunakan median kelas. Untuk mencegah kebocoran data (_data leakage_), proses ini di-fit hanya menggunakan training set.
 3. **Penyusunan 16 Fitur Komposit**: Engineering fitur baru yang mewakili kondisi klinis seperti indikator BMI sehat, normal insulin, serta rasio pregnancies terhadap usia.
 4. **Standardisasi Fitur**: Dilakukan hanya untuk algoritma linier/jarak (Logistic Regression, SVM, k-NN) dengan fit StandardScaler pada training set saja.
 5. **Ensemble Soft-Voting**: Memadukan probabilitas output dari dua model terbaik (LightGBM dan XGBoost) dengan bobot setara.
@@ -50,17 +50,17 @@ Pipeline eksperimental yang diusulkan oleh penulis terdiri dari langkah-langkah 
 
 ### B. Hasil Perbandingan Model (Single Models)
 
-| Model                   | Test Accuracy | Test F1-Score | ROC-AUC |
-| ----------------------- | ------------- | ------------- | ------- |
+| Model                   | Test Accuracy | Test F1-Score | ROC-AUC    |
+| ----------------------- | ------------- | ------------- | ---------- |
 | **Ensemble (LGBM+XGB)** | **89.61%**    | **85.19%**    | **94.52%** |
-| LightGBM                | 88.96%        | 84.11%        | 94.72%  |
-| XGBoost                 | 88.31%        | 83.64%        | 94.63%  |
-| Gradient Boosting       | 87.66%        | 82.24%        | 95.57%  |
-| Random Forest           | 85.06%        | 78.90%        | 93.69%  |
-| SVM                     | 83.77%        | 76.64%        | 90.05%  |
-| k-NN                    | 83.12%        | 75.00%        | 86.62%  |
-| Decision Tree           | 81.82%        | 75.44%        | 81.31%  |
-| Logistic Regression     | 79.22%        | 69.81%        | 87.35%  |
+| LightGBM                | 88.96%        | 84.11%        | 94.72%     |
+| XGBoost                 | 88.31%        | 83.64%        | 94.63%     |
+| Gradient Boosting       | 87.66%        | 82.24%        | 95.57%     |
+| Random Forest           | 85.06%        | 78.90%        | 93.69%     |
+| SVM                     | 83.77%        | 76.64%        | 90.05%     |
+| k-NN                    | 83.12%        | 75.00%        | 86.62%     |
+| Decision Tree           | 81.82%        | 75.44%        | 81.31%     |
+| Logistic Regression     | 79.22%        | 69.81%        | 87.35%     |
 
 ---
 
@@ -89,33 +89,32 @@ Pipeline eksperimental yang diusulkan oleh penulis terdiri dari langkah-langkah 
 
 ## 7. Hasil Replikasi Eksperimental (Notebook: Diabetes_Prediction.ipynb)
 
-Untuk menguji performa model secara terstandardisasi dan membandingkan hasil dengan teknik penataan data lainnya, kami mereplikasi eksperimen menggunakan model **Soft-Voting Ensemble (XGBoost + LightGBM)** dengan **16 Fitur Komposit Klinis** melalui 3 konfigurasi pipeline:
+Untuk menguji performa model secara terstandardisasi dan membandingkan hasil dengan teknik penataan data lainnya, kami mereplikasi eksperimen menggunakan **Model**: LightGBM, XGBoost, Gradient Boosting, dan Random Forest dengan KNN Imputation, 16 Composite Features, dan Leakage-Free Optuna Hyperparameter Tuning melalui 3 konfigurasi pipeline:
 
 ### A. Metodologi Eksperimen
 
 1. **Eksperimen 1 — Split-First Pipeline**
-   - **Alur**: `Split Data → Preprocessing → Training → Evaluation`
-   - **Keterangan**: Dataset dibagi terlebih dahulu menjadi data latih (80%) dan data uji (20%). Preprocessing (class-conditional median imputer untuk data latih dan overall median untuk data uji + StandardScaler + 16 Fitur Komposit) dilakukan terpisah secara legal. Ini adalah **pipeline yang benar** bebas dari data leakage.
+    - **Alur**: `Split Data → Preprocessing → Training → Evaluation`
+    - **Keterangan**: Dataset dibagi terlebih dahulu menjadi data latih (80%) dan data uji (20%). Preprocessing (menggunakan **KNN Imputer (k=5)** yang fit pada training saja + StandardScaler + 16 Fitur Komposit) dilakukan terpisah secara legal. Ini adalah **pipeline yang benar** bebas dari data leakage dan bebas dari target-conditional mismatch.
 2. **Eksperimen 2 — Preprocess-First Pipeline**
-   - **Alur**: `Preprocessing → Split Data → Training → Evaluation`
-   - **Keterangan**: Preprocessing dengan class-conditional imputer yang dipandu label kelas (`y`) dan resampling SMOTE dilakukan pada seluruh dataset secara global sebelum pemisahan data train-test dilakukan. Ini memicu terjadinya **Data Leakage (Kebocoran Data) parah**.
+    - **Alur**: `Preprocessing → Split Data → Training → Evaluation`
+    - **Keterangan**: Preprocessing dengan class-conditional imputer yang dipandu label kelas (`y`) dan resampling SMOTE dilakukan pada seluruh dataset secara global sebelum pemisahan data train-test dilakukan. Ini memicu terjadinya **Data Leakage (Kebocoran Data) parah** dan mereplikasi metodologi bias dari jurnal acuan.
 3. **Eksperimen 3 — Optimized Pipeline**
-   - **Alur**: `Split Data → Preprocessing → Hyperparameter Tuning → Training → Evaluation`
-   - **Keterangan**: Menggunakan alur Split-First yang aman seperti Eksperimen 1, kemudian ditambahkan proses optimasi hyperparameter XGBoost dan LightGBM secara terpisah menggunakan **Optuna** pada data latih dengan Cross-Validation 5-fold untuk mencari kombinasi parameter terbaik secara legal.
+    - **Alur**: `Split Data → Preprocessing → Hyperparameter Tuning → Training → Evaluation`
+    - **Keterangan**: Menggunakan alur Split-First yang aman dengan KNN Imputer (k=5), kemudian ditambahkan proses optimasi hyperparameter untuk XGBoost, LightGBM, dan Random Forest secara terpisah menggunakan **Optuna** (50 trials) pada data latih dengan Cross-Validation 5-fold untuk mencari kombinasi parameter terbaik secara legal.
 
 ### B. Perbandingan Hasil Evaluasi
 
-| Metrik Evaluasi | Eksperimen 1 (Split-First) | Eksperimen 2 (Preprocess-First) | Eksperimen 3 (Optimized) |
-| :--- | :---: | :---: | :---: |
-| **Accuracy (Akurasi)** | 67.53% | **90.50%** | **71.43%** |
-| **ROC-AUC** | 0.7481 | **0.9630** | **0.7733** |
-| **Precision** | 53.57% | **89.32%** | **61.36%** |
-| **Recall (Sensitivity)** | 55.56% | **92.00%** | 50.00% |
-| **F1-Score** | 54.55% | **90.64%** | **55.10%** |
+| Model             | Exp1 Split-First Acc | Exp1 Split-First AUC | Exp2 Leakage Acc | Exp2 Leakage AUC | Exp3 Optimized Acc | Exp3 Optimized AUC |
+| :---------------- | -------------------: | -------------------: | ---------------: | ---------------: | -----------------: | -----------------: |
+| **LightGBM**      |               73.38% |               0.8019 |       **90.50%** |           0.9644 |         **76.62%** |             0.8141 |
+| XGBoost           |               72.08% |               0.8076 |           89.50% |           0.9595 |             72.73% |         **0.8165** |
+| Gradient Boosting |               72.08% |               0.8106 |           90.50% |       **0.9686** |             72.08% |             0.8106 |
+| Random Forest     |               69.48% |               0.7931 |           91.00% |           0.9684 |             72.08% |             0.8089 |
 
 ### C. Temuan Kunci & Analisis Kritis
 
 1. **Analisis Kebocoran Data (Eksperimen 2)**:
-   Terlihat lonjakan performa yang sangat drastis pada Eksperimen 2 (Akurasi **90.50%** dan ROC-AUC **0.9630**). Hal ini disebabkan oleh masuknya informasi dari data uji melalui imputasi bersyarat kelas target dan SMOTE secara global. Ini mendemonstrasikan secara nyata mengapa hasil tinggi pada beberapa paper sering kali bersifat bias dan semu.
-2. **Optimasi & Regularisasi (Eksperimen 3)**:
-   Optuna berhasil melakukan tuning parameter secara independen pada training set, meningkatkan kemampuan generalisasi model. ROC-AUC meningkat dari **0.7481** menjadi **0.7733** dan Akurasi naik menjadi **71.43%**, membuktikan efektivitas optimasi hyperparameter yang bebas dari kebocoran data.
+   Terlihat lonjakan performa yang sangat drastis pada seluruh model di Eksperimen 2 (misalnya LightGBM Akurasi **90.50%** dan ROC-AUC **0.9644**, Random Forest mencapai akurasi **91.00%**). Hal ini disebabkan oleh masuknya informasi dari data uji melalui imputasi bersyarat kelas target dan SMOTE secara global. Ini mendemonstrasikan secara nyata mengapa hasil tinggi pada beberapa paper sering kali bersifat bias dan semu.
+2. **Peningkatan Performa Tanpa Mismatch (Eksperimen 3)**:
+   Dengan beralih dari class-conditional imputer ke **KNN Imputer (k=5)** dan mengoptimalkan parameter model dengan **Optuna (50 trials)** secara sah (hanya pada fold training), performa LightGBM mencapai akurasi **76.62%** dan ROC-AUC **0.8141**. Hal ini menunjukkan performa sesungguhnya (riil) dari model saat ditangani tanpa data leakage.

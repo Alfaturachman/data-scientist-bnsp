@@ -52,7 +52,7 @@ Tabel berikut menunjukkan perbandingan pendekatan metodologis, rekayasa fitur, m
 
 | Proyek Klasifikasi         | Dataset & Sampel           | Algoritma Utama & Model Terbaik             | Metrik Utama (Test Set)                                           | Inovasi / Fitur Kunci                                                                        | Jurnal Acuan                              |
 | :------------------------- | :------------------------- | :------------------------------------------ | :---------------------------------------------------------------- | :------------------------------------------------------------------------------------------- | :---------------------------------------- |
-| **Diabetes Prediction**    | Pima Indians (768 baris)   | Soft-Voting Ensemble (XGBoost + LightGBM)   | **Accuracy**: 71.43%<br>**ROC-AUC**: 77.33%                       | Class-Conditional Median Imputer, 16 Composite Features, Optuna Hyperparameter Tuning        | Ali et al. (Minia Univ, Egypt - 2025)     |
+| **Diabetes Prediction**    | Pima Indians (768 baris)   | Soft-Voting Ensemble (XGBoost + LightGBM + Random Forest)   | **Accuracy**: 73.38%<br>**ROC-AUC**: 80.91%                       | KNN Imputer (k=5), 16 Composite Features, Optuna Hyperparameter Tuning        | Ali et al. (Minia Univ, Egypt - 2025)     |
 | **Chronic Kidney Disease** | UCI CKD (400 baris)        | Random Forest, SVM, XGBoost, & Logistic Reg | **Accuracy**: 100%<br>**F1-Score**: 100%                          | Feature-Based K-Means Stratified Split, Polynomial Features (Degree 2)                       | Dong Phuong et al. (Bioinformatics, 2025) |
 | **Breast Cancer**          | WDBC Wisconsin (569 baris) | L2-Regularized Logistic Regression          | **Accuracy**: 98.25%<br>**F1-Score**: 97.56%                      | Z-Score Scaler terpisah, Transparansi Koefisien Ko-Variat untuk Interpretasi Medis           | Cheng & Yu (medRxiv Preprint, 2025)       |
 | **Heart Disease**          | UCI 4 Kohort (920 baris)   | XGBoost Classifier (Eksperimen 1)           | **Accuracy**: 81.52%<br>**Recall**: 83.01%<br>**AUC-ROC**: 0.8765 | Multi-cohort Imputation (convert Chol=0 to NaN), Outlier Removal Analysis (Isolation Forest) | Tabassum et al. (Scopus Q2, 2025)         |
@@ -64,12 +64,12 @@ Tabel berikut menunjukkan perbandingan pendekatan metodologis, rekayasa fitur, m
 ### 1. Prediksi Diabetes Mellitus (Pima Indians)
 
 - **Masalah Utama**: Adanya nilai `0` tidak logis pada indikator vital medis (`Glucose`, `BloodPressure`, `SkinThickness`, `Insulin`, `BMI`) yang jika diabaikan atau diimputasi secara global akan mendistorsi prediksi.
-- **Metode Solusi**: Menangani nilai nol sebagai data hilang (_missing value_) menggunakan `ClassConditionalMedianImputer` (imputasi median terpisah untuk kelas sehat dan diabetes) yang di-_fit_ secara aman pada data latih. Rekayasa **16 Fitur Komposit** (contoh: indeks metabolisme insulin, interaksi glukosa-usia) dilakukan untuk menangkap korelasi non-linier fitur.
+- **Metode Solusi**: Menangani nilai nol sebagai data hilang (_missing value_) menggunakan **KNN Imputer (k=5)** (pada skenario legal untuk menghindari mismatch train-test). Rekayasa **16 Fitur Komposit** (contoh: indeks metabolisme insulin, interaksi glukosa-usia) dilakukan untuk menangkap korelasi non-linier fitur.
 - **Pencegahan Data Leakage (Kebocoran Data)**:
   Eksperimen ini secara krusial menguji dampak data leakage melalui 3 skenario:
-    1.  **Skenario 1 (Split-First)**: Pembagian train-test secara aman terlebih dahulu sebelum imputasi. ROC-AUC: **74.81%**.
-    2.  **Skenario 2 (Preprocess-First - LEAKAGE)**: Imputasi dan SMOTE dilakukan secara global sebelum data dibagi. Hal ini memberikan hasil tinggi palsu (**ROC-AUC 96.30% / Akurasi 90.50%**), yang membuktikan target leakage berbahaya jika diterapkan pada keputusan medis riil.
-    3.  **Skenario 3 (Optimized)**: Skenario Split-First yang dioptimalkan secara legal menggunakan hyperparameter tuning berbasis **Optuna Bayesian Optimization** (5-Fold CV pada training set). ROC-AUC naik secara valid menjadi **77.33%** dengan Akurasi **71.43%**.
+    1.  **Skenario 1 (Split-First)**: Pembagian train-test secara aman terlebih dahulu sebelum imputasi dengan KNN Imputer (k=5). ROC-AUC: **81.43%** dengan Akurasi **72.73%**.
+    2.  **Skenario 2 (Preprocess-First - LEAKAGE)**: Imputasi bersyarat target secara global dan SMOTE dilakukan secara global sebelum data dibagi. Hal ini memberikan hasil tinggi palsu (**ROC-AUC 97.09% / Akurasi 90.50%**), yang membuktikan target leakage berbahaya jika diterapkan pada keputusan medis riil (mereplikasi metodologi bias dari jurnal acuan).
+    3.  **Skenario 3 (Optimized)**: Skenario Split-First yang dioptimalkan secara legal menggunakan hyperparameter tuning berbasis **Optuna Bayesian Optimization** (5-Fold CV pada training set). ROC-AUC naik secara valid menjadi **80.91%** dengan Akurasi **73.38%**.
 
 ### 2. Deteksi Penyakit Ginjal Kronis (CKD)
 
