@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Halaman Cover Presentasi Uji Kompetensi Data Scientist</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap');
+
+            :root {
+                --bg: #ffffff;
+                --panel: #f5f5f7;
+                --blue: #007aff;
+                --green: #34c759;
+                --slate: #86868b;
+                --text: #1d1d1f;
+                --text-sec: #6e6e73;
+                --border: rgba(0, 0, 0, 0.06);
+                --gradient: linear-gradient(135deg, #007aff 0%, #34c759 100%);
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background-color: #f5f5f7;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+                font-family:
+                    'Inter',
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    sans-serif;
+                color: var(--text);
+                -webkit-font-smoothing: antialiased;
+            }
+
+            /* Slide Container maintaining 16:9 Aspect Ratio */
+            .slide-container {
+                width: 100%;
+                max-width: 1120px;
+                aspect-ratio: 16 / 9;
+                background: radial-gradient(
+                    circle at 80% 20%,
+                    rgba(0, 122, 255, 0.05) 0%,
+                    rgba(52, 199, 89, 0.02) 50%,
+                    #ffffff 100%
+                );
+                box-shadow: 0 40px 100px rgba(0, 0, 0, 0.06);
+                border-radius: 28px;
+                padding: 55px 75px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: relative;
+                overflow: hidden;
+                border: 1px solid rgba(0, 0, 0, 0.04);
+            }
+
+            /* Header containing logos */
+            .logo-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+
+            .logo-group-left {
+                display: flex;
+                align-items: center;
+                gap: 22px;
+            }
+
+            .logo-img {
+                object-fit: contain;
+            }
+
+            .logo-udinus {
+                height: 52px;
+            }
+
+            .logo-lsp {
+                height: 48px;
+            }
+
+            .logo-bnsp {
+                height: 42px;
+            }
+
+            /* Main body area split layout */
+            .slide-body {
+                display: grid;
+                grid-template-columns: 1.35fr 1fr;
+                gap: 50px;
+                align-items: center;
+                flex-grow: 1;
+                margin-top: 30px;
+                margin-bottom: 25px;
+            }
+
+            /* Left Side: Presentation Title */
+            .slide-left {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .pill-badge {
+                display: inline-block;
+                padding: 6px 14px;
+                border-radius: 99px;
+                background-color: rgba(0, 122, 255, 0.08);
+                color: var(--blue);
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.8px;
+                text-transform: uppercase;
+            }
+
+            .slide-title {
+                font-size: 32px;
+                font-weight: 800;
+                line-height: 1.2;
+                color: var(--text);
+                letter-spacing: -0.8px;
+            }
+
+            .slide-subtitle {
+                font-size: 14.5px;
+                font-weight: 450;
+                line-height: 1.5;
+                color: var(--text-sec);
+            }
+
+            /* Right Side: Participant Identity Card */
+            .student-card {
+                background-color: var(--panel);
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                padding: 28px 30px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.015);
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .card-title {
+                font-size: 11px;
+                font-weight: 700;
+                color: var(--slate);
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+                padding-bottom: 8px;
+                margin-bottom: 4px;
+            }
+
+            .info-row {
+                display: flex;
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .info-label {
+                font-size: 9px;
+                font-weight: 700;
+                color: var(--slate);
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+            }
+
+            .info-val {
+                font-size: 13.5px;
+                font-weight: 600;
+                color: var(--text);
+            }
+
+            .font-mono {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 12.5px;
+            }
+
+            /* Footer */
+            .slide-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                border-top: 1px solid rgba(0, 0, 0, 0.06);
+                padding-top: 20px;
+                font-size: 11px;
+                color: var(--slate);
+                font-weight: 500;
+            }
+
+            .footer-left {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .footer-dot {
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background-color: var(--slate);
+            }
+
+            /* Media Queries for Responsive Scale on Smaller Viewports */
+            @media (max-width: 1150px) {
+                body {
+                    padding: 20px;
+                }
+                .slide-container {
+                    max-width: 100%;
+                    border-radius: 20px;
+                    padding: 40px 50px;
+                }
+                .slide-title {
+                    font-size: 28px;
+                }
+                .slide-subtitle {
+                    font-size: 13px;
+                }
+                .student-card {
+                    padding: 20px 24px;
+                    gap: 12px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="slide-container">
+            <!-- Header: Logos -->
+            <div class="logo-header">
+                <div class="logo-group-left">
+                    <img
+                        src="logo/logo_udinus.png"
+                        alt="Logo Udinus"
+                        class="logo-img logo-udinus"
+                    />
+                    <img
+                        src="logo/logo_lsp_udinus.png"
+                        alt="Logo LSP Udinus"
+                        class="logo-img logo-lsp"
+                    />
+                </div>
+                <img
+                    src="logo/logo_bnsp.png"
+                    alt="Logo BNSP"
+                    class="logo-img logo-bnsp"
+                />
+            </div>
+
+            <!-- Body: Title & Student Card -->
+            <div class="slide-body">
+                <div class="slide-left">
+                    <div class="pill-badge">
+                        Workshop Sertifikasi Data Scientist
+                    </div>
+                    <h1 class="slide-title">
+                        Klasifikasi Medis Pada Penyakit Diabetes Menggunakan
+                        Metode 4 Algoritma Machine Learning 
+                    </h1>
+                    <p class="slide-subtitle">
+                        Eksperimen Berstandar CRISP-DM dan Unit Kompetensi SKKNI
+                        pada Dataset Diabetes.
+                    </p>
+                </div>
+
+                <div class="student-card">
+                    <div class="card-title">Identitas Peserta</div>
+
+                    <div class="info-row">
+                        <span class="info-label">Nama Lengkap</span>
+                        <span class="info-val"
+                            >Alfaturachman Maulana Pahlevi</span
+                        >
+                    </div>
+
+                    <div class="info-row">
+                        <span class="info-label"
+                            >Nomor Induk Mahasiswa (NIM)</span
+                        >
+                        <span class="info-val font-mono">A11.2025.16609</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span class="info-label">Kelas / Instansi</span>
+                        <span class="info-val"
+                            >D.2.J / Universitas Dian Nuswantoro</span
+                        >
+                    </div>
+
+                    <div class="info-row">
+                        <span class="info-label">Skema Uji Kompetensi</span>
+                        <span class="info-val" style="color: var(--blue)"
+                            >Data Scientist (LSP UDINUS / BNSP)</span
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="slide-footer">
+                <div class="footer-left">
+                    <span>Fakultas Ilmu Komputer</span>
+                </div>
+                <div>Tahun 2026</div>
+            </div>
+        </div>
+    </body>
+</html>

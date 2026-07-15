@@ -402,7 +402,8 @@ def tune_lightgbm_leakage_free(X_tr_raw, y_tr):
             
         return np.mean(scores)
 
-    study = optuna.create_study(direction='maximize')
+    from optuna.samplers import TPESampler
+    study = optuna.create_study(direction='maximize', sampler=TPESampler(seed=42))
     study.optimize(objective, n_trials=50)
     return study.best_params
 
@@ -524,4 +525,4 @@ plt.show()
 #    * **Eksperimen 2 (Terjadi Leakage parah)** menghasilkan performa LightGBM yang melonjak secara tidak wajar ke Akurasi **90.50%** dan ROC-AUC **0.9644**.
 #    * **Penyebab**: Preprocessing global (imputasi bersyarat target dan SMOTE sebelum pemisahan data) membocorkan informasi label data uji ke dalam data latih. Hal ini membuktikan bahwa akurasi ~89% pada jurnal acuan disebabkan oleh kebocoran data.
 # 2. **Eksperimen 3 (Optimized)**:
-#    * Melalui optimasi hyperparameter dengan **Optuna** secara legal pada data latih, LightGBM mencapai performa terbaik yang valid dengan Akurasi **76.62%** dan ROC-AUC **0.8141**.
+#    * Melalui optimasi hyperparameter dengan **Optuna** secara legal pada data latih, LightGBM mencapai performa terbaik yang valid dengan Akurasi **75.32%** dan ROC-AUC **0.8170**.
