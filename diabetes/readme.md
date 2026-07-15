@@ -107,14 +107,14 @@ Untuk menguji performa model secara terstandardisasi dan membandingkan hasil den
 
 | Model             | Exp1 Split-First Acc | Exp1 Split-First AUC | Exp2 Leakage Acc | Exp2 Leakage AUC | Exp3 Optimized Acc | Exp3 Optimized AUC |
 | :---------------- | -------------------: | -------------------: | ---------------: | ---------------: | -----------------: | -----------------: |
-| **LightGBM**      |               73.38% |               0.8019 |       **90.50%** |           0.9644 |         **76.62%** |             0.8141 |
-| XGBoost           |               72.08% |               0.8076 |           89.50% |           0.9595 |             72.73% |         **0.8165** |
+| **LightGBM**      |               73.38% |               0.8019 |       **90.50%** |           0.9644 |         **75.32%** |         **0.8170** |
+| XGBoost           |               72.08% |               0.8076 |           89.50% |           0.9595 |             72.08% |             0.8076 |
 | Gradient Boosting |               72.08% |               0.8106 |           90.50% |       **0.9686** |             72.08% |             0.8106 |
-| Random Forest     |               69.48% |               0.7931 |           91.00% |           0.9684 |             72.08% |             0.8089 |
+| Random Forest     |               69.48% |               0.7931 |           91.00% |           0.9684 |             69.48% |             0.7931 |
 
 ### C. Temuan Kunci & Analisis Kritis
 
 1. **Analisis Kebocoran Data (Eksperimen 2)**:
    Terlihat lonjakan performa yang sangat drastis pada seluruh model di Eksperimen 2 (misalnya LightGBM Akurasi **90.50%** dan ROC-AUC **0.9644**, Random Forest mencapai akurasi **91.00%**). Hal ini disebabkan oleh masuknya informasi dari data uji melalui imputasi bersyarat kelas target dan SMOTE secara global. Ini mendemonstrasikan secara nyata mengapa hasil tinggi pada beberapa paper sering kali bersifat bias dan semu.
 2. **Peningkatan Performa Tanpa Mismatch (Eksperimen 3)**:
-   Dengan beralih dari class-conditional imputer ke **KNN Imputer (k=5)** dan mengoptimalkan parameter model dengan **Optuna (50 trials)** secara sah (hanya pada fold training), performa LightGBM mencapai akurasi **76.62%** dan ROC-AUC **0.8141**. Hal ini menunjukkan performa sesungguhnya (riil) dari model saat ditangani tanpa data leakage.
+   Dengan beralih dari class-conditional imputer ke **KNN Imputer (k=5)** dan mengoptimalkan parameter model dengan **Optuna (50 trials)** secara sah (hanya pada fold training), performa LightGBM mencapai akurasi **75.32%** dan ROC-AUC **0.8170**. Hal ini menunjukkan performa sesungguhnya (riil) dari model saat ditangani tanpa data leakage.
