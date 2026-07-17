@@ -1,4 +1,4 @@
-# Portofolio Uji Sertifikasi Kompetensi Data Scientist (BNSP)
+# Uji Sertifikasi Kompetensi Data Scientist (BNSP)
 
 ## Repositori Proyek Klasifikasi Medis & Analisis Jurnal (Replikasi Eksperimental)
 
@@ -52,8 +52,8 @@ Tabel berikut menunjukkan perbandingan pendekatan metodologis, rekayasa fitur, m
 
 | Proyek Klasifikasi         | Dataset & Sampel           | Algoritma Utama & Model Terbaik             | Metrik Utama (Test Set)                                           | Inovasi / Fitur Kunci                                                                        | Jurnal Acuan                              |
 | :------------------------- | :------------------------- | :------------------------------------------ | :---------------------------------------------------------------- | :------------------------------------------------------------------------------------------- | :---------------------------------------- |
-| **Diabetes Prediction**    | Pima Indians (768 baris)   | LightGBM (Optimized)                        | **Accuracy**: 75.32%<br>**ROC-AUC**: 81.70%                       | KNN Imputer (k=5), 16 Composite Features, Optuna Hyperparameter Tuning        | Ali et al. (Minia Univ, Egypt - 2025)     |
-| **Chronic Kidney Disease** | UCI CKD (400 baris)        | Random Forest, SVM, XGBoost, & Logistic Reg | **Accuracy**: 100%<br>**F1-Score**: 100%                          | Feature-Based K-Means Stratified Split, Polynomial Features (Degree 2)                       | Dong Phuong et al. (Bioinformatics, 2025) |
+| **Diabetes Prediction**    | Pima Indians (768 baris)   | LightGBM (Optimized)                        | **Accuracy**: 75.32%<br>**ROC-AUC**: 81.70%                       | KNN Imputer (k=5), 16 Composite Features, Optuna Hyperparameter Tuning                       | Ali et al. (Minia Univ, Egypt - 2025)     |
+| **Chronic Kidney Disease** | UCI CKD (400 baris)        | Random Forest, SVM, XGBoost, & Logistic Reg | **Accuracy**: 98.75% (Valid)<br>**ROC-AUC**: 1.0000 (Valid)         | Feature-Based K-Means Stratified Split, Polynomial Features (Degree 2) + Pembuktian Data Leakage | Dong Phuong et al. (Bioinformatics, 2025) |
 | **Breast Cancer**          | WDBC Wisconsin (569 baris) | L2-Regularized Logistic Regression          | **Accuracy**: 98.25%<br>**F1-Score**: 97.56%                      | Z-Score Scaler terpisah, Transparansi Koefisien Ko-Variat untuk Interpretasi Medis           | Cheng & Yu (medRxiv Preprint, 2025)       |
 | **Heart Disease**          | UCI 4 Kohort (920 baris)   | XGBoost Classifier (Eksperimen 1)           | **Accuracy**: 81.52%<br>**Recall**: 83.01%<br>**AUC-ROC**: 0.8765 | Multi-cohort Imputation (convert Chol=0 to NaN), Outlier Removal Analysis (Isolation Forest) | Tabassum et al. (Scopus Q2, 2025)         |
 
@@ -73,9 +73,14 @@ Tabel berikut menunjukkan perbandingan pendekatan metodologis, rekayasa fitur, m
 
 ### 2. Deteksi Penyakit Ginjal Kronis (CKD)
 
-- **Masalah Utama**: Heterogenitas pembagian data acak (train-test split) yang dapat memicu bias evaluasi kinerja pada dataset berdimensi tinggi dengan banyak fitur kategorikal.
-- **Metode Solusi**: Penerapan **Feature-Based Stratified Splitting Combined With K-Means Clustering** (K-Stratified Split). Metode ini mengelompokkan data terlebih dahulu ke dalam cluster homogen berbasis K-Means, lalu melakukan stratifikasi sampel dari masing-masing cluster.
-- **Hasil**: Pembagian data terbukti sangat homogen (tervalidasi lewat tes Kolmogorov-Smirnov). Dipasangkan dengan **Polynomial Features (Degree 2)** pada variabel numerik kunci, model Random Forest, SVM, Logistic Regression, dan XGBoost berhasil mencapai akurasi **100%** pada test set.
+- **Masalah Utama**: Heterogenitas pembagian data acak (train-test split) yang dapat memicu bias evaluasi kinerja pada dataset berdimensi tinggi dengan banyak fitur kategorikal, serta pembuktian ilmiah klaim akurasi sempurna 100% pada jurnal acuan.
+- **Metode Solusi**: Penerapan **Feature-Based Stratified Splitting Combined With K-Means Clustering** (K-Stratified Split) dan **Polynomial Features (Degree 2)**.
+- **Pencegahan Data Leakage (Kebocoran Data)**:
+  Eksperimen ini secara krusial menguji dampak data leakage melalui 3 skenario:
+    1.  **Skenario 1 (Split-First)**: Pembagian train-test secara aman terlebih dahulu sebelum preprocessing terpisah (imputasi, polynomial, scaling). SVM dan Logistic Regression mencapai **Akurasi 98.75%** dan **ROC-AUC 1.0000** secara valid.
+    2.  **Skenario 2 (Preprocess-First - LEAKAGE)**: Seluruh preprocessing dilakukan secara global sebelum data di-split dengan K-means stratified split. Ini mereplikasi pola kebocoran data (*data leakage*) jurnal acuan, menghasilkan akurasi artifisial **100.00%** pada Logistic Regression dan SVM.
+    3.  **Skenario 3 (Optimized)**: Skenario Split-First yang dioptimalkan secara legal menggunakan hyperparameter tuning berbasis **Optuna** secara cross-validation. Model SVM terbaik stabil pada **Akurasi 98.75%** dan **ROC-AUC 1.0000** bebas dari kebocoran data.
+- **Hasil**: Homogenitas pembagian data terbukti sangat tinggi (tervalidasi lewat tes Kolmogorov-Smirnov). Replikasi membuktikan klaim akurasi sempurna 100% pada jurnal acuan disebabkan oleh kebocoran data global. Performa riil model tanpa leakage adalah 98.75%.
 
 ### 3. Klasifikasi Tumor Payudara Wisconsin (WDBC)
 
