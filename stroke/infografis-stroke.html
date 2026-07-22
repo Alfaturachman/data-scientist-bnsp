@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>
+        Infografis Hasil Eksperimen — Stroke Risk Screening (SKKNI BNSP)
+    </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --bg: #ffffff;
+            --panel: #f8fafc;
+            --rose: #e11d48;
+            --rose-deep: #9f1239;
+            --rose-light: rgba(225, 29, 72, 0.05);
+            --emerald: #059669;
+            --emerald-deep: #047857;
+            --slate: #64748b;
+            --text: #0f172a;
+            --text-sec: #475569;
+            --amber: #d97706;
+            --border: rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            background: #f1f5f9;
+        }
+
+        body {
+            font-family:
+                'Inter',
+                -apple-system,
+                BlinkMacSystemFont,
+                'SF Pro Text',
+                sans-serif;
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            padding: 16px;
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: var(--bg);
+            box-shadow: 0 25px 60px rgba(15, 23, 42, 0.12);
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @media print {
+
+            html,
+            body {
+                background: #fff;
+                padding: 0;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                padding: 16px 20px;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* ================= HEADER ================= */
+        .header {
+            background: linear-gradient(135deg,
+                    #0f172a 0%,
+                    #1e1b4b 50%,
+                    #881337 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 13px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            font-size: 9px;
+            font-weight: 800;
+            color: #fb7185;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 3px;
+        }
+
+        .header-text h1 {
+            font-size: 19.5px;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+            line-height: 1.15;
+            color: #ffffff;
+        }
+
+        .header-text .subtitle {
+            font-size: 8.8px;
+            color: #cbd5e1;
+            margin-top: 4px;
+            line-height: 1.35;
+        }
+
+        .header-text .subtitle b {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .header-logos {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 4px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-logo-img {
+            height: 24px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* ================= SECTION TITLE ================= */
+        .section-title {
+            font-size: 9.2px;
+            font-weight: 800;
+            color: var(--text-sec);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 1.5mm;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--rose);
+            display: inline-block;
+        }
+
+        /* ================= METRICS PANEL ================= */
+        .metrics-panel {
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.95) 0%,
+                    rgba(248, 250, 252, 0.6) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(225, 29, 72, 0.15);
+            border-radius: 12px;
+            padding: 9px 12px;
+            display: flex;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(225, 29, 72, 0.04);
+        }
+
+        .metric-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 4px;
+        }
+
+        .metric-col:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 15%;
+            height: 70%;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .metric-col .kpi-value {
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            color: var(--text);
+            line-height: 1.1;
+        }
+
+        .metric-col.highlight-col .kpi-value {
+            color: var(--rose-deep);
+        }
+
+        .metric-col .kpi-sub {
+            font-size: 7.8px;
+            color: var(--slate);
+            font-weight: 600;
+            margin-top: 1px;
+        }
+
+        .metric-col .kpi-label {
+            font-size: 7.8px;
+            color: var(--text-sec);
+            margin-top: 2.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+        }
+
+        /* chips row */
+        .chip-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(248, 250, 252, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 4px 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .chip-row .chip-label {
+            font-size: 8px;
+            font-weight: 800;
+            color: var(--text-sec);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-right: 2px;
+        }
+
+        .chip {
+            background: var(--rose-light);
+            border: 1px solid rgba(225, 29, 72, 0.15);
+            border-radius: 100px;
+            padding: 2.5px 8px;
+            font-size: 7.8px;
+            font-weight: 700;
+            color: var(--rose-deep);
+        }
+
+        /* ================= TIMELINE GRID ================= */
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 7px;
+        }
+
+        .timeline-grid .t-row {
+            grid-column: span 2;
+            display: grid;
+            grid-template-areas:
+                'badge meta icon'
+                'desc desc desc';
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 7px 9px;
+            gap: 5px;
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-grid .t-row.col-span-3 {
+            grid-column: span 3;
+        }
+
+        .timeline-grid .t-row:hover {
+            transform: translateY(-1.5px);
+            border-color: rgba(225, 29, 72, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .timeline-grid .t-badge-circle {
+            grid-area: badge;
+            position: static;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e11d48, #9f1239);
+            color: #fff;
+            font-size: 8px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            justify-self: start;
+        }
+
+        .timeline-grid .t-icon-circle {
+            grid-area: icon;
+            justify-self: end;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(225, 29, 72, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .timeline-grid .t-icon-circle svg {
+            width: 11px;
+            height: 11px;
+            stroke: var(--rose-deep);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .timeline-grid .t-meta {
+            grid-area: meta;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            width: auto;
+        }
+
+        .timeline-grid .t-meta .t-code {
+            font-size: 7.2px;
+            color: var(--slate);
+            font-weight: 700;
+            font-family: monospace;
+        }
+
+        .timeline-grid .t-meta .t-title {
+            font-size: 8.8px;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.1;
+        }
+
+        .timeline-grid .t-desc {
+            grid-area: desc;
+            margin-top: 3px;
+            font-size: 7.8px;
+            color: var(--text-sec);
+            line-height: 1.3;
+        }
+
+        .timeline-grid .t-desc b {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        /* ================= MODEL RESULTS TABLE ================= */
+        .results-table-wrap {
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            overflow: hidden;
+            background: rgba(248, 250, 252, 0.5);
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8px;
+            text-align: left;
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 5px 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .results-table th {
+            font-weight: 800;
+            color: var(--text);
+            font-size: 7.8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            background: rgba(15, 23, 42, 0.03);
+        }
+
+        .results-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .results-table tr.highlight-row {
+            background: rgba(225, 29, 72, 0.05);
+            font-weight: 700;
+        }
+
+        .results-table tr.highlight-row td {
+            color: var(--rose-deep);
+        }
+
+        .results-table .model-name {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .results-table .metric-val {
+            font-family: monospace;
+            font-size: 8px;
+        }
+
+        /* ================= COMPARISON CARDS ================= */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
+
+        .c-card {
+            background: rgba(248, 250, 252, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 7px 9px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .c-card.best {
+            background: #ffffff;
+            border: 1.5px solid #059669;
+            box-shadow: 0 4px 10px rgba(5, 150, 105, 0.08);
+        }
+
+        .c-badge {
+            position: absolute;
+            top: 4px;
+            right: 6px;
+            background: linear-gradient(135deg, #059669, #047857);
+            color: #fff;
+            font-size: 6.5px;
+            font-weight: 800;
+            padding: 1.5px 5px;
+            border-radius: 100px;
+        }
+
+        .c-label {
+            font-size: 7.2px;
+            color: var(--slate);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .c-content-wrap {
+            margin-top: 3px;
+        }
+
+        .c-exp {
+            font-size: 8.8px;
+            color: var(--text);
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .c-value {
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            color: var(--text);
+            margin-top: 1.5px;
+        }
+
+        .c-card.best .c-value {
+            color: #047857;
+        }
+
+        .bar-track {
+            width: 100%;
+            height: 4px;
+            background-color: #e2e8f0;
+            border-radius: 10px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            background-color: #94a3b8;
+        }
+
+        .c-card.best .bar-fill {
+            background-color: #059669;
+        }
+
+        /* ================= EVALUATION GRID ================= */
+        .eval-grid {
+            display: grid;
+            grid-template-columns: 10fr 10fr;
+            gap: 8px;
+        }
+
+        .eval-card {
+            background: rgba(248, 250, 252, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 6px 9px;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5px;
+        }
+
+        .eval-card-title {
+            font-size: 7.5px;
+            color: var(--slate);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .feat-importance {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5px;
+        }
+
+        .feat-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 7.5px;
+        }
+
+        .feat-name {
+            width: 65px;
+            font-weight: 700;
+            color: var(--text-sec);
+        }
+
+        .feat-bar-track {
+            flex-grow: 1;
+            height: 4px;
+            background-color: #e2e8f0;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .feat-bar-fill {
+            display: block;
+            height: 100%;
+            background-color: #e11d48;
+            border-radius: 2px;
+        }
+
+        .feat-val {
+            width: 25px;
+            text-align: right;
+            font-family: monospace;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .threshold-box {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .t-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 3px 6px;
+            font-size: 7.5px;
+        }
+
+        .t-item b {
+            color: var(--rose-deep);
+        }
+
+        /* ================= INSIGHT BANNER ================= */
+        .insight-banner {
+            background: linear-gradient(135deg,
+                    rgba(225, 29, 72, 0.05) 0%,
+                    rgba(255, 255, 255, 0.95) 100%);
+            border: 1px solid rgba(225, 29, 72, 0.2);
+            border-radius: 10px;
+            padding: 8px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.03);
+        }
+
+        .insight-header {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .insight-title {
+            font-size: 8.5px;
+            font-weight: 800;
+            color: var(--rose-deep);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .insight-content-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 7px;
+        }
+
+        .insight-item {
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(225, 29, 72, 0.1);
+            border-radius: 6px;
+            padding: 5px 7px;
+            font-size: 7.5px;
+            color: var(--text-sec);
+            line-height: 1.3;
+        }
+
+        .insight-item b {
+            color: var(--text);
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-text">
+                <div class="eyebrow">
+                    Uji Sertifikasi Kompetensi Data Scientist (BNSP)
+                </div>
+                <h1>Hasil Eksperimen Skrining Risiko Stroke</h1>
+                <div class="subtitle">
+                    Skema:
+                    <b>Data Scientist</b><br />
+                    Case Study:
+                    <b>Posbindu PTM Puskesmas Kecamatan Semarang</b>
+                    <br />
+                    Paper Acuan:
+                    <b>Explainable machine learning for stroke risk
+                        prediction a comparative study with SHAP-based
+                        interpretation</b>
+                </div>
+            </div>
+
+            <div class="header-logos">
+                <img src="logo/logo_udinus.png" alt="Logo Udinus" class="header-logo-img" />
+                <img src="logo/logo_lsp_udinus.png" alt="Logo LSP Udinus" class="header-logo-img" />
+                <img src="logo/logo_bnsp.png" alt="Logo BNSP" class="header-logo-img" />
+            </div>
+        </div>
+
+        <!-- RINGKASAN DATA & MODEL (METRICS BAR) -->
+        <div>
+            <div class="section-title">
+                <span class="dot"></span>Ringkasan Data &amp; Model
+            </div>
+            <div class="metrics-panel">
+                <div class="metric-col">
+                    <div class="kpi-value">10.000</div>
+                    <div class="kpi-sub">baris · 10 kolom</div>
+                    <div class="kpi-label">Dataset Awal</div>
+                </div>
+                <div class="metric-col">
+                    <div class="kpi-value">2.000</div>
+                    <div class="kpi-sub">20% Test Set</div>
+                    <div class="kpi-label">Data Uji Test</div>
+                </div>
+                <div class="metric-col">
+                    <div class="kpi-value">201</div>
+                    <div class="kpi-sub">BMI Imputation</div>
+                    <div class="kpi-label">Imputasi Median</div>
+                </div>
+                <div class="metric-col">
+                    <div class="kpi-value">12</div>
+                    <div class="kpi-sub">ColumnTransformer</div>
+                    <div class="kpi-label">Fitur Terproses</div>
+                </div>
+                <div class="metric-col">
+                    <div class="kpi-value">80/20</div>
+                    <div class="kpi-sub">Stratified Split</div>
+                    <div class="kpi-label">Split Train/Test</div>
+                </div>
+                <div class="metric-col highlight-col">
+                    <div class="kpi-value">0,7651</div>
+                    <div class="kpi-sub">Logistic Regression</div>
+                    <div class="kpi-label">Model Terbaik (Recall)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHIPS TEKNIK INTI -->
+        <div class="chip-row">
+            <span class="chip-label">Teknik Inti</span>
+            <span class="chip">Imblearn Pipeline</span>
+            <span class="chip">ColumnTransformer</span>
+            <span class="chip">Median Imputer</span>
+            <span class="chip">OneHotEncoder</span>
+            <span class="chip">SMOTE Resampling</span>
+            <span class="chip">5-Fold Stratified CV</span>
+            <span class="chip">SHAP TreeExplainer</span>
+        </div>
+
+        <!-- WORKFLOW TIMELINE (11 SKKNI UNITS) -->
+        <div>
+            <div class="section-title">
+                <span class="dot"></span>Alur Kerja Eksperimen (11 Unit
+                SKKNI Data Science)
+            </div>
+            <div class="timeline-grid">
+                <div class="t-row">
+                    <div class="t-badge-circle">01</div>
+                    <div class="t-icon-circle">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <circle cx="12" cy="12" r="6" />
+                            <circle cx="12" cy="12" r="2" />
+                        </svg>
+                    </div>
+                    <div class="t-meta">
+                        <span class="t-code">J.62DMI00.001.1</span>
+                        <span class="t-title">Objektif Bisnis</span>
+                    </div>
+                    <div class="t-desc">
+                        1. <b>Skrining Cepat</b>: Identifikasi populasi
+                        risiko stroke di Posbindu PTM.<br />
+                        2. <b>Presisi Rujukan</b>: Menyeimbangkan beban
+                        rujukan Puskesmas &amp; spesialis.
+                    </div>
+                </div>
+                <div class="t-row">
+                    <div class="t-badge-circle">02</div>
+                    <div class="t-icon-circle">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                            <line x1="4" y1="22" x2="4" y2="15" />
+                        </svg>
+                    </div>
+                    <div class="t-meta">
+                        <span class="t-code">J.62DMI00.002.1</span>
+                        <span class="t-title">Tujuan Teknis</span>
+                    </div>
+                    <div class="t-desc">
+                        Klasifikasi biner target 0/1 stroke, fokus pada
+                        <b>F1-Score, Recall &amp; PR-AUC</b> (hindari
+                        Akurasi Naif 70,22%).
+                    </div>
+                </div>
+                <div class="t-row">
+                    <div class="t-badge-circle">03</div>
+                    <div class="t-icon-circle">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                    </div>
+                    <div class="t-meta">
+                        <span class="t-code">J.62DMI00.005.1</span>
+                        <span class="t-title">Menelaah Data</span>
+                    </div>
+                    <div class="t-desc">
+                        Analisis <b>10.000 baris x 10 kolom</b>. Ditemukan
+                        imbalanced class 29,78% Stroke vs 70,22% Non-Stroke.
+                    </div>
+                </div>
+                <div class="t-row">
+                    <div class="t-badge-circle">04</div>
+                    <div class="t-icon-circle">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <polyline points="9 11 11 13 15 9" />
+                        </svg>
+                    </div>
+                    <div class="t-meta">
+                        <span class="t-code">J.62DMI00.006.1</span>
+                        <span class="t-title">Memvalidasi Data</span>
+                    </div>
+                    <div class="t-desc">
+                        Cek konsistensi data klinis, identifikasi missing
+                        <code>BMI</code> (2,01%), 0 duplikasi, &amp; data
+                        valid 100%.
+                    </div>
+                </div>
+                <div class="t-row">
+                    <div class="t-badge-circle">05</div>
+                    <div class="t-icon-circle">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="22" y1="12" x2="18" y2="12" />
+                            <line x1="6" y1="12" x2="2" y2="12" />
+                            <line x1="12" y1="6" x2="12" y2="2" />
+                            <line x1="12" y1="22" x2="12" y2="18" />
+                        </svg>
+                    </div>
+                    <div class="t-meta">
+                        <span class="t-code">J.62DMI00.007.1</span>
+                        <span class="t-title">Menentukan Objek Data</span>
+                    </div>
+                    <div class="t-desc">
+                        Pisah X &amp; y. <b>Keluarkan SES</b> demi etika
+                        keadilan sosial pelayanan publik Puskesmas Semarang.
+                    </div>
+                </div>
+                <div class="t-row" style="
+                            background: rgba(255, 149, 0, 0.08);
+                            border-color: rgba(255, 149, 0, 0.3);
+                        ">
+                    <div class="t-badge-circle" style="background: #ff9500">
+                        08
+                    </div>
+                    <div class="t-icon-circle" style="background: rgba(255, 149, 0, 0.12)">
+                        <svg viewBox="0 0 24 24" style="stroke: #d97706">
+                            <line x1="6" y1="3" x2="6" y2="15" />
+                            <circle cx="18" cy="6" r="3" />
+                            <circle cx="6" cy="18" r="3" />
+                            <path d="M18 9a9 9 0 0 1-9 9" />
+                        </svg>
+                    </div>
+                    <div class="t-meta">
+                        <span class="t-code" style="color: #d97706">J.62DMI00.012.1</span>
+                        <span class="t-title" style="color: #b45309">Split Test Set Dulu!</span>
+                    </div>
+                    <div class="t-desc">
+                        <b>Stratified 80:20 Split</b> wajib dieksekusi
+                        pertama di kode untuk mencegah terjadinya
+                        <i>Data Leakage</i>.
+                    </div>
+                </div>
+                <div class="t-row">
+                    <div class="t-badge-circle">06</div>
+                    <div class="t-icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m20 20-3-3" />
+                            <path d="M12 14.5 16 19" />
+                            <path d="M14 11 19 16" />
+                            <path d="M12 21 4 13a2 2 0 0 1 0-2.83l6.5-6.5a2 2 0 0 1 2.83 0l8 8" />
+                            <path d="M8 7 3 2" />
+                            <path d="M5 10 2 7" />
+                        </svg>
+                    </div>
+                    <div class="t-meta">
+                        <span class="t-code">J.62DMI00.008.1</span>
+                        <span class="t-title">Membersihkan Data</span>
+                    </div>
+                    <div class="t-desc">
+                        Imputasi median <code>BMI</code> terisolasi secara
+                        legal di dalam
+                        <code>ColumnTransformer</code> training set.
+                    </div>
+                </div>
+                <div class="t-row">
+                    <div class="t-badge-circle">07</div>
+                    <div class="t-icon-circle">
+                        <svg viewBox="0 0 24 24">
+                            <line x1="4" y1="21" x2="4" y2="14" />
+                            <line x1="4" y1="10" x2="4" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="12" />
+                            <line x1="12" y1="8" x2="12" y2="3" />
+                            <line x1="20" y1="21" x2="20" y2="16" />
+                            <line x1="20" y1="12" x2="20" y2="3" />
+                            <line x1="1" y1="14" x2="7" y2="14" />
+                            <line x1="9" y1="8" x2="15" y2="8" />
+                            <line x1="17" y1="16" x2="23" y2="16" />
+                        </svg>
+                    </div>
+                    <div class="t-meta">
+                        <span class="t-code">J.62DMI00.009.1</span>
+                        <span class="t-title">Mengkonstruksi Data</span>
+                    </div>
+                    <div class="t-desc">
+                        Menerapkan <code>StandardScaler</code> pada numerik
+                        &amp; <code>OneHotEncoder</code> pada kategorikal
+                        nominal.
+                    </div>
+                </div>
+                <div class="t-row">
+                    <div class="t-badge-circle">09</div>
+                    <div class="t-icon-circle">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                        </svg>
+                    </div>
+                    <div class="t-meta">
+                        <span class="t-code">J.62DMI00.013.1</span>
+                        <span class="t-title">Membangun Model</span>
+                    </div>
+                    <div class="t-desc">
+                        Integrasi <b>SMOTE</b> + 5-Fold Stratified CV +
+                        <code>GridSearchCV</code> dalam
+                        <code>ImbPipeline</code>.
+                    </div>
+                </div>
+                <div class="t-row col-span-3">
+                    <div class="t-badge-circle">10</div>
+                    <div class="t-icon-circle">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 3v18h18" />
+                            <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
+                        </svg>
+                    </div>
+                    <div class="t-meta">
+                        <span class="t-code">J.62DMI00.014.1</span>
+                        <span class="t-title">Mengevaluasi Model</span>
+                    </div>
+                    <div class="t-desc">
+                        Evaluasi 5 model pada test set 2.000 sampel.
+                        <b>Logistic Reg.</b> terbaik: PR-AUC 0,7245, F1
+                        0,6538, ROC 0,8506.
+                    </div>
+                </div>
+                <div class="t-row col-span-3">
+                    <div class="t-badge-circle">11</div>
+                    <div class="t-icon-circle">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                        </svg>
+                    </div>
+                    <div class="t-meta">
+                        <span class="t-code">J.62DMI00.015.1</span>
+                        <span class="t-title">Review &amp; Interpretasi SHAP</span>
+                    </div>
+                    <div class="t-desc">
+                        Interpretasi SHAP TreeExplainer, Interaksi
+                        Hipertensi x Penyakit Jantung, Audit Paper (F1
+                        Sejati 0,5861 vs LightGBM 0,6535).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODEL RESULTS TABLE -->
+        <div>
+            <div class="section-title">
+                <span class="dot"></span>Hasil Performa Evaluasi 5 Algoritma
+                Klasifikasi (Data Uji 2.000 Sampel)
+            </div>
+            <div class="results-table-wrap">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Algoritma Model</th>
+                            <th>Akurasi</th>
+                            <th>Presisi</th>
+                            <th>Recall</th>
+                            <th>F1-Score</th>
+                            <th>ROC-AUC</th>
+                            <th>PR-AUC</th>
+                            <th>Brier Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="highlight-row">
+                            <td class="model-name">
+                                Logistic Regression (Best PR-AUC &amp; F1)
+                            </td>
+                            <td class="metric-val">0,7585</td>
+                            <td class="metric-val">0,5707</td>
+                            <td class="metric-val"><b>0,7651</b></td>
+                            <td class="metric-val"><b>0,6538</b></td>
+                            <td class="metric-val"><b>0,8506</b></td>
+                            <td class="metric-val"><b>0,7245</b></td>
+                            <td class="metric-val">0,1570</td>
+                        </tr>
+                        <tr>
+                            <td class="model-name">LightGBM Classifier</td>
+                            <td class="metric-val"><b>0,7710</b></td>
+                            <td class="metric-val"><b>0,6012</b></td>
+                            <td class="metric-val">0,6879</td>
+                            <td class="metric-val">0,6416</td>
+                            <td class="metric-val">0,8408</td>
+                            <td class="metric-val">0,7184</td>
+                            <td class="metric-val">0,1549</td>
+                        </tr>
+                        <tr>
+                            <td class="model-name">XGBoost Classifier</td>
+                            <td class="metric-val">0,7685</td>
+                            <td class="metric-val">0,5927</td>
+                            <td class="metric-val">0,7131</td>
+                            <td class="metric-val">0,6474</td>
+                            <td class="metric-val">0,8426</td>
+                            <td class="metric-val">0,7127</td>
+                            <td class="metric-val">0,1530</td>
+                        </tr>
+                        <tr>
+                            <td class="model-name">
+                                Random Forest Classifier
+                            </td>
+                            <td class="metric-val">0,7695</td>
+                            <td class="metric-val">0,5968</td>
+                            <td class="metric-val">0,6980</td>
+                            <td class="metric-val">0,6435</td>
+                            <td class="metric-val">0,8390</td>
+                            <td class="metric-val">0,7084</td>
+                            <td class="metric-val">0,1533</td>
+                        </tr>
+                        <tr>
+                            <td class="model-name">
+                                MLP Classifier (Neural Network)
+                            </td>
+                            <td class="metric-val">0,7475</td>
+                            <td class="metric-val">0,5601</td>
+                            <td class="metric-val">0,7114</td>
+                            <td class="metric-val">0,6268</td>
+                            <td class="metric-val">0,8263</td>
+                            <td class="metric-val">0,6813</td>
+                            <td class="metric-val">0,1668</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- COMPARISON CARDS -->
+        <div>
+            <div class="section-title">
+                <span class="dot"></span>Sorotan Perbandingan Model (Metrik
+                Utama: Recall)
+            </div>
+            <div class="compare-grid">
+                <div class="c-card">
+                    <div class="c-label">Grad Boosting</div>
+                    <div class="c-content-wrap">
+                        <div class="c-exp">LightGBM</div>
+                        <div class="c-value">0,6879</div>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 68.79%"></div>
+                    </div>
+                </div>
+                <div class="c-card">
+                    <div class="c-label">Tree Ensemble</div>
+                    <div class="c-content-wrap">
+                        <div class="c-exp">Random Forest</div>
+                        <div class="c-value">0,6980</div>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 69.8%"></div>
+                    </div>
+                </div>
+                <div class="c-card">
+                    <div class="c-label">Neural Network</div>
+                    <div class="c-content-wrap">
+                        <div class="c-exp">MLP Network</div>
+                        <div class="c-value">0,7114</div>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 71.14%"></div>
+                    </div>
+                </div>
+                <div class="c-card">
+                    <div class="c-label">Grad Boosting</div>
+                    <div class="c-content-wrap">
+                        <div class="c-exp">XGBoost</div>
+                        <div class="c-value">0,7131</div>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 71.31%"></div>
+                    </div>
+                </div>
+                <div class="c-card best">
+                    <div class="c-badge">BEST RECALL</div>
+                    <div class="c-label">Linear Model</div>
+                    <div class="c-content-wrap">
+                        <div class="c-exp">Logistic Reg.</div>
+                        <div class="c-value">0,7651</div>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 76.51%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FITUR & EVALUASI KLINIS -->
+        <div>
+            <div class="section-title">
+                <span class="dot"></span>Analisis Fitur &amp; Evaluasi
+                Ambang Batas Medis
+            </div>
+            <div class="eval-grid">
+                <!-- Column 1: Feature Importance -->
+                <div class="eval-card">
+                    <div class="eval-card-title">
+                        Top 4 Fitur Terpenting (SHAP TreeExplainer)
+                    </div>
+                    <div class="feat-importance">
+                        <div class="feat-row">
+                            <span class="feat-name">Usia</span>
+                            <div class="feat-bar-track">
+                                <div class="feat-bar-fill" style="width: 35%"></div>
+                            </div>
+                            <span class="feat-val">0.28</span>
+                        </div>
+                        <div class="feat-row">
+                            <span class="feat-name">Gula Darah</span>
+                            <div class="feat-bar-track">
+                                <div class="feat-bar-fill" style="width: 28%"></div>
+                            </div>
+                            <span class="feat-val">0.22</span>
+                        </div>
+                        <div class="feat-row">
+                            <span class="feat-name">BMI</span>
+                            <div class="feat-bar-track">
+                                <div class="feat-bar-fill" style="width: 22%"></div>
+                            </div>
+                            <span class="feat-val">0.18</span>
+                        </div>
+                        <div class="feat-row">
+                            <span class="feat-name">Hipertensi</span>
+                            <div class="feat-bar-track">
+                                <div class="feat-bar-fill" style="width: 15%"></div>
+                            </div>
+                            <span class="feat-val">0.14</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Clinical Threshold Recommendations -->
+                <div class="eval-card">
+                    <div class="eval-card-title">
+                        Rekomendasi Threshold Operasional Klinis
+                    </div>
+                    <div class="threshold-box">
+                        <div class="t-item">
+                            <span><b>1. Skrining Massal Posbindu:</b> Thres
+                                0.30–0.40</span>
+                            <span>Recall &gt; 85%</span>
+                        </div>
+                        <div class="t-item">
+                            <span><b>2. Standar Puskesmas:</b> Thres
+                                0.45–0.50</span>
+                            <span>F1 Max (0,6535)</span>
+                        </div>
+                        <div class="t-item">
+                            <span><b>3. Rujukan Spesialis Terbatas:</b> Thres
+                                0.55–0.65</span>
+                            <span>Precision &gt; 75%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INSIGHT UTAMA -->
+        <div class="insight-banner">
+            <div class="insight-header">
+                <span class="insight-title">Temuan Utama &amp; Audit Akademis Eksperimen</span>
+            </div>
+            <div class="insight-content-grid">
+                <div class="insight-item">
+                    <p class="insight-text">
+                        Eksekusi
+                        <b>Split Test Set 80:20 mendahului preprocessing
+                            &amp; SMOTE</b>
+                        di <code>ImbPipeline</code> menjamin bebas
+                        <i>Data Leakage</i> dengan F1 train vs test gap &lt;
+                        0.08.
+                    </p>
+                </div>
+                <div class="insight-item">
+                    <p class="insight-text">
+                        Penggunaan
+                        <b>PR-AUC (0,7120) &amp; F1-Score (0,6535)</b>
+                        sebagai acuan utama menanggulangi fenomena
+                        <i>ROC Illusion</i> pada data imbalanced 30:70.
+                    </p>
+                </div>
+                <div class="insight-item">
+                    <p class="insight-text">
+                        Audit matriks paper Tang et al. (2026) mengungkap F1
+                        sejati paper <b>0,5861</b>. Model LightGBM
+                        eksperimen Anda terbukti
+                        <b>11.5% lebih unggul</b> dan tervalidasi.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

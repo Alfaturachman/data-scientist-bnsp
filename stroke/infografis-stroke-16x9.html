@@ -1,0 +1,1131 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infografis Eksperimen Skrining Risiko Stroke (16:9 Widescreen)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700;800&display=swap');
+
+        :root {
+            --bg-canvas: #f8fafc;
+            --card-bg: #ffffff;
+            --border-light: #e2e8f0;
+            --border-accent: #cbd5e1;
+
+            --text-dark: #0f172a;
+            --text-body: #334155;
+            --text-muted: #64748b;
+
+            --primary: #2563eb;
+            --primary-bg: #eff6ff;
+            --primary-border: #bfdbfe;
+
+            --success: #059669;
+            --success-bg: #ecfdf5;
+            --success-border: #a7f3d0;
+
+            --danger: #e11d48;
+            --danger-bg: #fff1f2;
+            --danger-border: #fecdd3;
+
+            --warning: #d97706;
+            --warning-bg: #fffbeb;
+            --warning-border: #fde68a;
+
+            --purple: #7c3aed;
+            --purple-bg: #f5f3ff;
+            --purple-border: #ddd6fe;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #cbd5e1;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 16:9 Widescreen Infographic Canvas */
+        .infographic-canvas {
+            width: 100%;
+            max-width: 1440px;
+            aspect-ratio: 16 / 9;
+            background-color: var(--bg-canvas);
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(15, 23, 42, 0.12);
+            padding: 28px 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            border: 1px solid #ffffff;
+            position: relative;
+        }
+
+        /* ================= 1. HEADER HERO BANNER ================= */
+        .header-hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 18px;
+            padding: 16px 24px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-bg);
+            border: 1px solid var(--primary-border);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 99px;
+            width: fit-content;
+        }
+
+        .header-badge .dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.6px;
+        }
+
+        .header-subtitle {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .header-logos {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            background: #f8fafc;
+            border: 1px solid var(--border-light);
+            padding: 12px 24px;
+            border-radius: 16px;
+        }
+
+        .header-logo-img {
+            height: 52px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* ================= MAIN CONTENT SECTION LAYOUT ================= */
+        .infographic-body {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 14px;
+            flex-grow: 1;
+        }
+
+        /* SECTION TITLE BAR */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+        }
+
+        .section-header .icon-box {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: var(--primary-bg);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* ================= ROW 1: 4 STAT CALLOUT CARDS ================= */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--primary-bg);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .stat-card.danger .stat-icon {
+            background: var(--danger-bg);
+            color: var(--danger);
+        }
+
+        .stat-card.success .stat-icon {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+
+        .stat-card.warning .stat-icon {
+            background: var(--warning-bg);
+            color: var(--warning);
+        }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.1;
+        }
+
+        .stat-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-body);
+            margin-top: 2px;
+        }
+
+        .stat-desc {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* ================= ROW 2: SPLIT LAYOUT (SKKNI FLOW + EXPERIMENT RESULTS) ================= */
+        .main-split {
+            display: grid;
+            grid-template-columns: 1.1fr 1.9fr;
+            gap: 14px;
+            flex-grow: 1;
+        }
+
+        /* CARD PANELS */
+        .card-panel {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* SKKNI 11 STEPS GRID (Horizontal Timeline Style) */
+        .skkni-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px 8px;
+            flex-grow: 1;
+        }
+
+        .skkni-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            background: #f8fafc;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 6px 8px;
+        }
+
+        .skkni-step.highlight-step {
+            background: var(--warning-bg);
+            border-color: var(--warning-border);
+        }
+
+        .skkni-badge {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            background: var(--primary);
+            color: #ffffff;
+            font-size: 9px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .skkni-step.highlight-step .skkni-badge {
+            background: var(--warning);
+        }
+
+        .skkni-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .skkni-code {
+            font-size: 8.5px;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .skkni-step.highlight-step .skkni-code {
+            color: var(--warning);
+        }
+
+        .skkni-name {
+            font-size: 9.5px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        /* RESULTS RIGHT SIDE PANEL */
+        .results-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-grow: 1;
+        }
+
+        /* WINNER MODEL HIGHLIGHT CARDS */
+        .winner-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .winner-card {
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            border: 1.5px solid var(--primary-border);
+            border-radius: 12px;
+            padding: 10px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            position: relative;
+        }
+
+        .winner-card.green-theme {
+            background: linear-gradient(135deg, #ecfdf5 0%, #ffffff 100%);
+            border-color: var(--success-border);
+        }
+
+        .winner-tag {
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+        }
+
+        .winner-card.green-theme .winner-tag {
+            color: var(--success);
+        }
+
+        .winner-name {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .winner-metrics {
+            display: flex;
+            gap: 12px;
+            margin-top: 2px;
+        }
+
+        .wm-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wm-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .winner-card.green-theme .wm-val {
+            color: var(--success);
+        }
+
+        .wm-lbl {
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* MODEL COMPARISON TABLE */
+        .model-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .model-table th {
+            background: #f8fafc;
+            color: var(--text-muted);
+            font-size: 9.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 6px 8px;
+            text-align: left;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .model-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid var(--border-light);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-dark);
+        }
+
+        .model-table tr.champion-row {
+            background: var(--primary-bg);
+            font-weight: 700;
+        }
+
+        /* SHAP & THRESHOLD & PAPER AUDIT FOOTER GRID */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.2fr;
+            gap: 10px;
+        }
+
+        .mini-card {
+            background: #f8fafc;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 8px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mini-title {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--text-dark);
+            text-transform: uppercase;
+        }
+
+        /* SHAP BARS */
+        .shap-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .sb-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 9.5px;
+        }
+
+        .sb-name {
+            font-weight: 600;
+            color: var(--text-body);
+        }
+
+        .sb-score {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: var(--danger);
+        }
+
+        /* THRESHOLD PILLS */
+        .t-pill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .t-pill {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            padding: 2px 6px;
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+        }
+
+        .t-pill b {
+            color: var(--text-dark);
+        }
+
+        .t-pill span {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--warning);
+            font-weight: 700;
+        }
+
+        /* AUDIT CARD REDESIGN */
+        .audit-banner {
+            background: #fffbeb;
+            border: 1.5px solid #fde68a;
+            border-radius: 12px;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .audit-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .audit-title {
+            font-size: 10px;
+            font-weight: 800;
+            color: #92400e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .audit-journal-tag {
+            font-size: 8.5px;
+            font-weight: 700;
+            color: #b45309;
+            background: #ffffff;
+            border: 1px solid #fef08a;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .audit-quote {
+            font-size: 8.5px;
+            font-style: italic;
+            color: #78350f;
+            background: #ffffff;
+            border-left: 3px solid #d97706;
+            padding: 4px 8px;
+            border-radius: 4px;
+            line-height: 1.25;
+        }
+
+        .audit-compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 6px;
+            margin-top: 2px;
+        }
+
+        .audit-box-item {
+            background: #ffffff;
+            border: 1px solid #fde68a;
+            border-radius: 6px;
+            padding: 4px 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .audit-box-label {
+            font-size: 8px;
+            font-weight: 700;
+            color: #92400e;
+            text-transform: uppercase;
+        }
+
+        .audit-box-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 800;
+            color: #78350f;
+        }
+
+        .audit-box-val.highlight {
+            color: #059669;
+        }
+
+        /* Print Media Query */
+        @media print {
+            body {
+                background: #ffffff;
+                padding: 0;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .infographic-canvas {
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                width: 100vw;
+                height: 100vh;
+                max-width: none;
+            }
+
+            @page {
+                size: 16in 9in;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="infographic-canvas">
+
+        <!-- 1. HEADER HERO BANNER -->
+        <header class="header-hero">
+            <div class="header-left">
+                <div class="header-badge">
+                    <span class="dot"></span>
+                    Sertifikasi Data Scientist — SKKNI BNSP & CRISP-DM
+                </div>
+                <h1 class="header-title">Hasil Eksperimen Pemodelan Skrining Risiko Stroke</h1>
+                <p class="header-subtitle">
+                    Sistem Bantu Keputusan Medis Berbasis 11 Unit Kompetensi pada Program Posbindu PTM Kota Semarang
+                </p>
+            </div>
+            <div class="header-logos">
+                <img src="logo/logo_udinus.png" alt="Logo Udinus" class="header-logo-img"
+                    onerror="if(!this.dataset.retry){this.dataset.retry=true;this.src='../logo/logo_udinus.png';}" />
+                <img src="logo/logo_lsp_udinus.png" alt="Logo LSP Udinus" class="header-logo-img"
+                    onerror="if(!this.dataset.retry){this.dataset.retry=true;this.src='../logo/logo_lsp_udinus.png';}" />
+                <img src="logo/logo_bnsp.png" alt="Logo BNSP" class="header-logo-img"
+                    onerror="if(!this.dataset.retry){this.dataset.retry=true;this.src='../logo/logo_bnsp.png';}" />
+            </div>
+        </header>
+
+        <!-- 2. MAIN INFOGRAPHIC BODY -->
+        <div class="infographic-body">
+
+            <!-- EXECUTIVE IMPACT SUMMARY BANNER -->
+            <div
+                style="background: linear-gradient(90deg, #eff6ff 0%, #ecfdf5 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02);">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span
+                        style="background: #2563eb; color: #ffffff; font-size: 9.5px; font-weight: 800; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Executive
+                        Summary</span>
+                    <span style="font-size: 11.5px; font-weight: 700; color: #0f172a;">
+                        Model <b>Logistic Regression Pipeline</b> berhasil mencapai Recall Skrining Stroke Medis
+                        <b>76,51%</b> (F1: 0,6538 & PR-AUC: 0,7245), unggul <b>+11,55%</b> dibanding paper acuan tanpa
+                        kebocoran data.
+                    </span>
+                </div>
+                <div
+                    style="font-size: 10.5px; font-weight: 800; color: #059669; white-space: nowrap; background: #ffffff; border: 1px solid #a7f3d0; padding: 3px 10px; border-radius: 99px;">
+                    Leakage-Free Guarantee
+                </div>
+            </div>
+
+            <!-- ROW 1: 4 STAT CALLOUT CARDS -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number">10.000</div>
+                        <div class="stat-title">Dataset Rekam Medis</div>
+                        <div class="stat-desc">10 Kolom Fitur Klinis</div>
+                    </div>
+                </div>
+
+                <div class="stat-card danger">
+                    <div class="stat-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                            </path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number">29.78%</div>
+                        <div class="stat-title">Kasus Stroke (Class Imbalance)</div>
+                        <div class="stat-desc">Rasio 30:70 Teratasi SMOTE</div>
+                    </div>
+                </div>
+
+                <div class="stat-card success">
+                    <div class="stat-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number">80 : 20</div>
+                        <div class="stat-title">Stratified Holdout Split</div>
+                        <div class="stat-desc">2.000 Sampel Test Set Uji</div>
+                    </div>
+                </div>
+
+                <div class="stat-card warning">
+                    <div class="stat-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number">0% Leak</div>
+                        <div class="stat-title">Integritas Data Strict</div>
+                        <div class="stat-desc">Split Dulu Baru Preprocess</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROW 2: MAIN SPLIT (SKKNI FLOW + EXPERIMENT RESULTS) -->
+            <div class="main-split">
+
+                <!-- LEFT: ALUR 11 UNIT SKKNI (2 COLUMNS, NO SCROLL) -->
+                <div class="card-panel">
+                    <div class="section-header">
+                        <div class="icon-box">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        Alur 11 Unit SKKNI
+                    </div>
+
+                    <div class="skkni-grid">
+                        <div class="skkni-step">
+                            <div class="skkni-badge">01</div>
+                            <div class="skkni-text">
+                                <span class="skkni-code">J.62DMI00.001.1</span>
+                                <span class="skkni-name">Objektif Bisnis SMART</span>
+                            </div>
+                        </div>
+
+                        <div class="skkni-step">
+                            <div class="skkni-badge">02</div>
+                            <div class="skkni-text">
+                                <span class="skkni-code">J.62DMI00.002.1</span>
+                                <span class="skkni-name">Tujuan Teknis (Recall & PR-AUC)</span>
+                            </div>
+                        </div>
+
+                        <div class="skkni-step">
+                            <div class="skkni-badge">03</div>
+                            <div class="skkni-text">
+                                <span class="skkni-code">J.62DMI00.005.1</span>
+                                <span class="skkni-name">Menelaah Data (EDA & Imbalance)</span>
+                            </div>
+                        </div>
+
+                        <div class="skkni-step">
+                            <div class="skkni-badge">04</div>
+                            <div class="skkni-text">
+                                <span class="skkni-code">J.62DMI00.006.1</span>
+                                <span class="skkni-name">Validasi Data (Zero Duplicates)</span>
+                            </div>
+                        </div>
+
+                        <div class="skkni-step">
+                            <div class="skkni-badge">05</div>
+                            <div class="skkni-text">
+                                <span class="skkni-code">J.62DMI00.007.1</span>
+                                <span class="skkni-name">Objek Data (Etika Drop SES)</span>
+                            </div>
+                        </div>
+
+                        <div class="skkni-step">
+                            <div class="skkni-badge">06</div>
+                            <div class="skkni-text">
+                                <span class="skkni-code">J.62DMI00.008.1</span>
+                                <span class="skkni-name">Membersihkan Data (Imputasi)</span>
+                            </div>
+                        </div>
+
+                        <div class="skkni-step">
+                            <div class="skkni-badge">07</div>
+                            <div class="skkni-text">
+                                <span class="skkni-code">J.62DMI00.009.1</span>
+                                <span class="skkni-name">Konstruksi Data (Pipeline)</span>
+                            </div>
+                        </div>
+
+                        <div class="skkni-step highlight-step">
+                            <div class="skkni-badge">08</div>
+                            <div class="skkni-text">
+                                <span class="skkni-code">J.62DMI00.012.1</span>
+                                <span class="skkni-name">Split 80:20 (Bebas Leakage)</span>
+                            </div>
+                        </div>
+
+                        <div class="skkni-step">
+                            <div class="skkni-badge">09</div>
+                            <div class="skkni-text">
+                                <span class="skkni-code">J.62DMI00.013.1</span>
+                                <span class="skkni-name">Model SMOTE & GridSearch</span>
+                            </div>
+                        </div>
+
+                        <div class="skkni-step">
+                            <div class="skkni-badge">10</div>
+                            <div class="skkni-text">
+                                <span class="skkni-code">J.62DMI00.014.1</span>
+                                <span class="skkni-name">Evaluasi Model (7 Metrik)</span>
+                            </div>
+                        </div>
+
+                        <div class="skkni-step" style="grid-column: span 2;">
+                            <div class="skkni-badge">11</div>
+                            <div class="skkni-text">
+                                <span class="skkni-code">J.62DMI00.015.1</span>
+                                <span class="skkni-name">Review Pemodelan (SHAP TreeExplainer & Audit Paper)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: EXPERIMENT RESULTS & PERFORMANCE TABLES -->
+                <div class="card-panel">
+                    <div class="section-header">
+                        <div class="icon-box">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <line x1="18" y1="20" x2="18" y2="10"></line>
+                                <line x1="12" y1="20" x2="12" y2="4"></line>
+                                <line x1="6" y1="20" x2="6" y2="14"></line>
+                            </svg>
+                        </div>
+                        Hasil Performa Pemodelan 5 Algoritma Machine Learning (Data Uji 2.000 Sampel)
+                    </div>
+
+                    <div class="results-section">
+                        <!-- WINNER CARDS -->
+                        <div class="winner-row">
+                            <div class="winner-card">
+                                <div class="winner-tag">Model Terbaik Overall (Best F1, Recall & PR-AUC)</div>
+                                <div class="winner-name">Logistic Regression</div>
+                                <div class="winner-metrics">
+                                    <div class="wm-item">
+                                        <span class="wm-val">0,6538</span>
+                                        <span class="wm-lbl">F1-Score (Best)</span>
+                                    </div>
+                                    <div class="wm-item">
+                                        <span class="wm-val">76,51%</span>
+                                        <span class="wm-lbl">Recall (Best)</span>
+                                    </div>
+                                    <div class="wm-item">
+                                        <span class="wm-val">0,7245</span>
+                                        <span class="wm-lbl">PR-AUC (Best)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="winner-card green-theme">
+                                <div class="winner-tag">Akurasi & Presisi Tertinggi</div>
+                                <div class="winner-name">LightGBM Classifier</div>
+                                <div class="winner-metrics">
+                                    <div class="wm-item">
+                                        <span class="wm-val">0,7710</span>
+                                        <span class="wm-lbl">Accuracy (Best)</span>
+                                    </div>
+                                    <div class="wm-item">
+                                        <span class="wm-val">0,6012</span>
+                                        <span class="wm-lbl">Precision (Best)</span>
+                                    </div>
+                                    <div class="wm-item">
+                                        <span class="wm-val">0,6416</span>
+                                        <span class="wm-lbl">F1-Score</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- METRIC TABLE -->
+                        <table class="model-table">
+                            <thead>
+                                <tr>
+                                    <th>Algoritma Model</th>
+                                    <th>Akurasi</th>
+                                    <th>Presisi</th>
+                                    <th>Recall</th>
+                                    <th>F1-Score</th>
+                                    <th>PR-AUC</th>
+                                    <th>Brier</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="champion-row">
+                                    <td><b>Logistic Regression</b></td>
+                                    <td>0,7585</td>
+                                    <td>0,5707</td>
+                                    <td>
+                                        <div style="display:flex; align-items:center; gap:6px;">
+                                            <b>0,7651</b>
+                                            <div
+                                                style="width:36px; height:5px; background:#dcfce7; border-radius:4px; overflow:hidden;">
+                                                <div style="width:76.51%; height:100%; background:#059669;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="display:flex; align-items:center; gap:6px;">
+                                            <b>0,6538</b>
+                                            <div
+                                                style="width:36px; height:5px; background:#dbeafe; border-radius:4px; overflow:hidden;">
+                                                <div style="width:65.38%; height:100%; background:#2563eb;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><b>0,7245</b></td>
+                                    <td>0,1570</td>
+                                </tr>
+                                <tr>
+                                    <td>Random Forest</td>
+                                    <td>0,7695</td>
+                                    <td>0,5968</td>
+                                    <td>
+                                        <div style="display:flex; align-items:center; gap:6px;">
+                                            <span>0,6980</span>
+                                            <div
+                                                style="width:36px; height:5px; background:#f1f5f9; border-radius:4px; overflow:hidden;">
+                                                <div style="width:69.8%; height:100%; background:#64748b;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="display:flex; align-items:center; gap:6px;">
+                                            <span>0,6435</span>
+                                            <div
+                                                style="width:36px; height:5px; background:#f1f5f9; border-radius:4px; overflow:hidden;">
+                                                <div style="width:64.35%; height:100%; background:#64748b;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>0,7084</td>
+                                    <td>0,1533</td>
+                                </tr>
+                                <tr>
+                                    <td>XGBoost Classifier</td>
+                                    <td>0,7685</td>
+                                    <td>0,5927</td>
+                                    <td>
+                                        <div style="display:flex; align-items:center; gap:6px;">
+                                            <span>0,7131</span>
+                                            <div
+                                                style="width:36px; height:5px; background:#f1f5f9; border-radius:4px; overflow:hidden;">
+                                                <div style="width:71.31%; height:100%; background:#64748b;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="display:flex; align-items:center; gap:6px;">
+                                            <span>0,6474</span>
+                                            <div
+                                                style="width:36px; height:5px; background:#f1f5f9; border-radius:4px; overflow:hidden;">
+                                                <div style="width:64.74%; height:100%; background:#64748b;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>0,7127</td>
+                                    <td><b>0,1530</b></td>
+                                </tr>
+                                <tr>
+                                    <td>LightGBM Classifier</td>
+                                    <td><b>0,7710</b></td>
+                                    <td><b>0,6012</b></td>
+                                    <td>
+                                        <div style="display:flex; align-items:center; gap:6px;">
+                                            <span>0,6879</span>
+                                            <div
+                                                style="width:36px; height:5px; background:#f1f5f9; border-radius:4px; overflow:hidden;">
+                                                <div style="width:68.79%; height:100%; background:#64748b;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="display:flex; align-items:center; gap:6px;">
+                                            <span>0,6416</span>
+                                            <div
+                                                style="width:36px; height:5px; background:#f1f5f9; border-radius:4px; overflow:hidden;">
+                                                <div style="width:64.16%; height:100%; background:#64748b;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>0,7184</td>
+                                    <td>0,1549</td>
+                                </tr>
+                                <tr>
+                                    <td>MLP (Deep Learning)</td>
+                                    <td>0,7475</td>
+                                    <td>0,5601</td>
+                                    <td>
+                                        <div style="display:flex; align-items:center; gap:6px;">
+                                            <span>0,7114</span>
+                                            <div
+                                                style="width:36px; height:5px; background:#f1f5f9; border-radius:4px; overflow:hidden;">
+                                                <div style="width:71.14%; height:100%; background:#64748b;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="display:flex; align-items:center; gap:6px;">
+                                            <span>0,6268</span>
+                                            <div
+                                                style="width:36px; height:5px; background:#f1f5f9; border-radius:4px; overflow:hidden;">
+                                                <div style="width:62.68%; height:100%; background:#64748b;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>0,6813</td>
+                                    <td>0,1668</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROW 3: BOTTOM INSIGHTS & AUDIT (3 COLUMNS) -->
+            <div class="bottom-grid">
+                <!-- MINI CARD 1: SHAP FEATURE IMPORTANCE -->
+                <div class="mini-card">
+                    <div class="mini-title">Top 5 Fitur SHAP (Feature Mean |SHAP|)</div>
+                    <div class="shap-bars">
+                        <div class="sb-row">
+                            <span class="sb-name">1. Hipertensi</span>
+                            <span class="sb-score">0,9087</span>
+                        </div>
+                        <div class="sb-row">
+                            <span class="sb-name">2. Penyakit Jantung</span>
+                            <span class="sb-score">0,4574</span>
+                        </div>
+                        <div class="sb-row">
+                            <span class="sb-name">3. Diabetes</span>
+                            <span class="sb-score">0,3244</span>
+                        </div>
+                        <div class="sb-row">
+                            <span class="sb-name">4. Usia (Age)</span>
+                            <span class="sb-score">0,2896</span>
+                        </div>
+                        <div class="sb-row">
+                            <span class="sb-name">5. BMI (Massa Tubuh)</span>
+                            <span class="sb-score">0,1084</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MINI CARD 2: CLINICAL THRESHOLD RECOMMENDATION -->
+                <div class="mini-card">
+                    <div class="mini-title">Threshold Medis Posbindu</div>
+                    <div class="t-pill-list">
+                        <div class="t-pill">
+                            <b>Skrining Massal:</b>
+                            <span>Thres 0.35 (Recall >85%)</span>
+                        </div>
+                        <div class="t-pill">
+                            <b>Standar Puskesmas:</b>
+                            <span>Thres 0.50 (F1 Max 0.6538)</span>
+                        </div>
+                        <div class="t-pill">
+                            <b>Rujukan Spesialis:</b>
+                            <span>Thres 0.65 (Prec >75%)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MINI CARD 3: AUDIT PAPER REFERENSI (REDESIGNED) -->
+                <div class="audit-banner">
+                    <div class="audit-header">
+                        <div class="audit-title">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                            Audit Paper Acuan
+                        </div>
+                        <span class="audit-journal-tag">Frontiers in Neurology (2026)</span>
+                    </div>
+
+                    <div class="audit-quote">
+                        "Explainable machine learning for stroke risk prediction: a comparative study with SHAP-based
+                        interpretation" (Tang et al., 2026)
+                    </div>
+
+                    <div style="font-size: 9px; color: #78350f; line-height: 1.35; margin-top: 3px;">
+                        Paper acuan mengklaim F1 0,74, namun audit Confusion Matrix membuktikan F1 sejati paper adalah
+                        <b>0,5861</b>. Model eksperimen ini terbukti <b style="color:#059669;">+11,55% lebih unggul
+                            (0,6538)</b> dengan garansi <i>Data Leakage-Free</i>.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

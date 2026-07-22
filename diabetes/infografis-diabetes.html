@@ -1,0 +1,1743 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Infografis Hasil Eksperimen — Diabetes Prediction</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+            :root {
+                --bg: #ffffff;
+                --panel: #f5f5f7;
+                --panel-blue: rgba(52, 199, 89, 0.04);
+                --blue: #34c759;
+                --blue-deep: #248a3d;
+                --slate: #86868b;
+                --text: #1d1d1f;
+                --text-sec: #6e6e73;
+                --green: #007aff;
+                --orange: #ff9500;
+                --border: rgba(0, 0, 0, 0.05);
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            html,
+            body {
+                background: #f5f5f7;
+            }
+
+            body {
+                font-family:
+                    'Inter',
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    'SF Pro Text',
+                    sans-serif;
+                color: var(--text);
+                display: flex;
+                justify-content: center;
+                padding: 16px;
+                margin: 0;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            .page {
+                width: 210mm;
+                height: 297mm;
+                background: var(--bg);
+                box-shadow: 0 30px 70px rgba(0, 0, 0, 0.08);
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 2.2mm;
+                overflow: hidden;
+                position: relative;
+            }
+
+            @media print {
+                html,
+                body {
+                    background: #fff;
+                    padding: 0;
+                    -webkit-print-color-adjust: exact !important;
+                    print-color-adjust: exact !important;
+                }
+                .page {
+                    box-shadow: none;
+                    margin: 0;
+                    -webkit-print-color-adjust: exact !important;
+                    print-color-adjust: exact !important;
+                }
+                @page {
+                    size: A4;
+                    margin: 0;
+                }
+                * {
+                    -webkit-print-color-adjust: exact !important;
+                    print-color-adjust: exact !important;
+                }
+                .pill {
+                    background-color: #34c759 !important;
+                    background: #34c759 !important;
+                    color: #ffffff !important;
+                }
+                .c-badge {
+                    background-color: #34c759 !important;
+                    background: #34c759 !important;
+                    color: #ffffff !important;
+                }
+                .bar-track {
+                    background-color: #e5e5ea !important;
+                    background: #e5e5ea !important;
+                }
+                .feat-bar-track {
+                    width: 100% !important;
+                    background-color: #e5e5ea !important;
+                    background: #e5e5ea !important;
+                    position: relative !important;
+                }
+                .bar-fill {
+                    background-color: #8e8e93 !important;
+                    background: #8e8e93 !important;
+                }
+                .bar-fill.yellow-bar {
+                    background-color: #ffcc00 !important;
+                    background: #ffcc00 !important;
+                }
+                .bar-fill.red-bar {
+                    background-color: #ff3b30 !important;
+                    background: #ff3b30 !important;
+                }
+                .c-card.best .bar-fill {
+                    background-color: #34c759 !important;
+                    background: #34c759 !important;
+                }
+                .feat-bar-fill {
+                    display: block !important;
+                    position: absolute !important;
+                    left: 0 !important;
+                    top: 0 !important;
+                    height: 100% !important;
+                    background-color: #34c759 !important;
+                    background: #34c759 !important;
+                }
+                .header {
+                    background: #093019 !important;
+                    background-color: #093019 !important;
+                }
+                .header-text h1,
+                .header-text .subtitle b {
+                    color: #ffffff !important;
+                }
+                .header-text .subtitle {
+                    color: #c9e8d3 !important;
+                }
+                .eyebrow {
+                    color: #a2e8b9 !important;
+                }
+            }
+
+            /* ================= HEADER ================= */
+            .header {
+                background: linear-gradient(135deg, #093019 0%, #124d2a 100%);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 16px;
+                padding: 16px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+                overflow: hidden;
+            }
+            .header-text {
+                position: relative;
+                z-index: 1;
+            }
+            .eyebrow {
+                font-size: 9.5px;
+                font-weight: 700;
+                color: #a2e8b9;
+                text-transform: uppercase;
+                letter-spacing: 0.8px;
+                margin-bottom: 3px;
+            }
+            .header-text h1 {
+                font-size: 19px;
+                font-weight: 700;
+                letter-spacing: -0.5px;
+                line-height: 1.1;
+                color: #ffffff;
+            }
+            .header-text .subtitle {
+                font-size: 9px;
+                color: #c9e8d3;
+                margin-top: 4px;
+                line-height: 1.35;
+            }
+            .header-text .subtitle b {
+                color: #ffffff;
+                font-weight: 600;
+            }
+            .pill {
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                background-color: #34c759;
+                background: linear-gradient(135deg, #34c759, #248a3d);
+                color: #ffffff;
+                font-size: 8.5px;
+                font-weight: 600;
+                padding: 3px 9px;
+                border-radius: 100px;
+                margin-top: 5px;
+                box-shadow: 0 2px 5px rgba(52, 199, 89, 0.15);
+            }
+            .pill svg {
+                width: 9px;
+                height: 9px;
+                stroke: #ffffff;
+                fill: none;
+                stroke-width: 2.5;
+            }
+            .header-illustration {
+                width: 50px;
+                height: 50px;
+                flex-shrink: 0;
+                opacity: 0.85;
+            }
+            .header-illustration.left {
+                margin-right: -10px;
+            }
+            .header-illustration.right {
+                margin-left: -10px;
+            }
+            .header-logos {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                position: absolute;
+                top: 8px;
+                right: 10px;
+                z-index: 2;
+                background: rgba(255, 255, 255, 0.95);
+                padding: 4px 10px;
+                border-radius: 10px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+            .header-logo-img {
+                height: 24px;
+                width: auto;
+                object-fit: contain;
+            }
+
+            /* ================= SECTION LABEL ================= */
+            .section-title {
+                font-size: 9.5px;
+                font-weight: 700;
+                color: var(--text-sec);
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                margin-bottom: 1.2mm;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            .section-title .dot {
+                width: 4.5px;
+                height: 4.5px;
+                border-radius: 50%;
+                background: var(--blue);
+                display: inline-block;
+            }
+
+            /* ================= METRICS PANEL ================= */
+            .metrics-panel {
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.95) 0%,
+                    rgba(245, 245, 247, 0.4) 100%
+                );
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(52, 199, 89, 0.15);
+                border-radius: 14px;
+                padding: 8px 12px;
+                display: flex;
+                justify-content: space-between;
+                box-shadow: 0 6px 20px rgba(52, 199, 89, 0.03);
+            }
+            .metric-col {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                position: relative;
+                padding: 0 4px;
+            }
+            .metric-col:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 15%;
+                height: 70%;
+                width: 1px;
+                background: var(--border);
+            }
+            .metric-col svg {
+                width: 14px;
+                height: 14px;
+                stroke: var(--blue);
+                fill: none;
+                stroke-width: 1.8;
+                margin-bottom: 4px;
+                background: rgba(52, 199, 89, 0.08);
+                padding: 4px;
+                border-radius: 7px;
+                box-sizing: content-box;
+            }
+            .metric-col.highlight-col svg {
+                background: var(--blue);
+                stroke: #ffffff;
+            }
+            .metric-col.highlight-col .kpi-value {
+                color: var(--blue-deep);
+            }
+            .metric-col .kpi-value {
+                font-size: 15px;
+                font-weight: 700;
+                letter-spacing: -0.4px;
+                color: var(--text);
+                line-height: 1.1;
+            }
+            .metric-col .kpi-sub {
+                font-size: 7.5px;
+                color: var(--slate);
+                font-weight: 500;
+                margin-top: 1px;
+            }
+            .metric-col .kpi-label {
+                font-size: 7.8px;
+                color: var(--text-sec);
+                margin-top: 3px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.1px;
+            }
+
+            /* chips row */
+            .chip-row {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                background: rgba(245, 245, 247, 0.6);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 4px 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .chip-row .chip-label {
+                font-size: 8px;
+                font-weight: 700;
+                color: var(--text-sec);
+                text-transform: uppercase;
+                letter-spacing: 0.4px;
+                margin-right: 2px;
+            }
+            .chip {
+                background: var(--panel-blue);
+                border: 1px solid rgba(52, 199, 89, 0.12);
+                border-radius: 100px;
+                padding: 2.5px 8px;
+                font-size: 8px;
+                font-weight: 600;
+                color: var(--blue-deep);
+            }
+
+            /* ================= VERTICAL TIMELINE / GRID ================= */
+            .timeline-grid {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 8px;
+            }
+            .timeline-grid .t-row {
+                grid-column: span 2;
+                display: grid;
+                grid-template-areas:
+                    'badge meta icon'
+                    'desc desc desc';
+                grid-template-columns: auto 1fr auto;
+                align-items: center;
+                background: rgba(255, 255, 255, 0.8);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                padding: 8px 10px;
+                gap: 6px;
+                transition: all 0.2s ease;
+                position: relative;
+                z-index: 1;
+            }
+            .timeline-grid .t-row.col-span-3 {
+                grid-column: span 3;
+            }
+            .timeline-grid .t-row:hover {
+                transform: translateY(-1.5px);
+                border-color: rgba(52, 199, 89, 0.2);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            }
+            .timeline-grid .t-badge-circle {
+                grid-area: badge;
+                position: static;
+                width: 16px;
+                height: 16px;
+                font-size: 8px;
+                justify-self: start;
+            }
+            .timeline-grid .t-icon-circle {
+                grid-area: icon;
+                justify-self: end;
+            }
+            .timeline-grid .t-meta {
+                grid-area: meta;
+                display: flex;
+                flex-direction: column;
+                gap: 1px;
+                width: auto;
+            }
+            .timeline-grid .t-meta .t-title {
+                line-height: 1.1;
+            }
+            .timeline-grid .t-desc {
+                grid-area: desc;
+                margin-top: 4px;
+            }
+
+            .timeline-v {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                position: relative;
+                padding-left: 5px;
+            }
+            .timeline-v::before {
+                content: '';
+                position: absolute;
+                left: 14.5px;
+                top: 8px;
+                bottom: 8px;
+                width: 1px;
+                background: rgba(52, 199, 89, 0.15);
+                border-left: 1px dashed rgba(52, 199, 89, 0.25);
+            }
+            .t-row {
+                display: flex;
+                align-items: center;
+                background: rgba(255, 255, 255, 0.8);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                padding: 5px 10px;
+                gap: 8px;
+                transition: all 0.2s ease;
+                position: relative;
+                z-index: 1;
+            }
+            .t-row:hover {
+                transform: translateX(1.5px);
+                border-color: rgba(52, 199, 89, 0.2);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            }
+            .t-badge-circle {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #34c759, #248a3d);
+                color: #fff;
+                font-size: 9.5px;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                box-shadow: 0 2px 6px rgba(52, 199, 89, 0.15);
+            }
+            .t-icon-circle {
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                background: rgba(52, 199, 89, 0.06);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+            .t-icon-circle svg {
+                width: 11px;
+                height: 11px;
+                stroke: var(--blue);
+                fill: none;
+                stroke-width: 2;
+            }
+            .t-meta {
+                width: 195px;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                flex-shrink: 0;
+            }
+            .t-meta .t-code {
+                font-size: 7.5px;
+                color: var(--slate);
+                font-weight: 600;
+                font-family: monospace;
+            }
+            .t-meta .t-title {
+                font-size: 9px;
+                font-weight: 700;
+                color: var(--text);
+            }
+            .t-arrow {
+                font-size: 9px;
+                color: var(--blue);
+                opacity: 0.6;
+                flex-shrink: 0;
+            }
+            .t-desc {
+                font-size: 8px;
+                color: var(--text-sec);
+                line-height: 1.3;
+                flex-grow: 1;
+            }
+            .t-desc b {
+                color: var(--text);
+                font-weight: 600;
+            }
+
+            /* ================= COMPARISON ================= */
+            .compare-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 7px;
+            }
+            .c-card {
+                background: rgba(245, 245, 247, 0.6);
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 8px 10px;
+                position: relative;
+                transition: all 0.2s ease;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            .c-card:hover {
+                transform: translateY(-1.5px);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.03);
+            }
+            .c-card.best {
+                background: rgba(255, 255, 255, 0.95);
+                border: 1.5px solid #34c759;
+            }
+            .c-badge {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                background: linear-gradient(135deg, #34c759, #248a3d);
+                color: #fff;
+                font-size: 7px;
+                font-weight: 600;
+                padding: 1.5px 5px;
+                border-radius: 100px;
+                display: flex;
+                align-items: center;
+                gap: 2px;
+            }
+            .c-badge svg {
+                width: 7px;
+                height: 7px;
+                fill: #ffffff;
+            }
+            .c-label {
+                font-size: 7.5px;
+                color: var(--slate);
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.3px;
+            }
+            .c-content-wrap {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-top: 4px;
+            }
+            .mini-chart {
+                width: 26px;
+                height: 26px;
+                flex-shrink: 0;
+            }
+            .c-trophy {
+                width: 24px;
+                height: 24px;
+                stroke: var(--blue);
+                fill: none;
+                stroke-width: 1.5;
+                flex-shrink: 0;
+            }
+            .c-info {
+                display: flex;
+                flex-direction: column;
+            }
+            .c-exp {
+                font-size: 9px;
+                color: var(--text);
+                font-weight: 600;
+                line-height: 1.1;
+            }
+            .c-value {
+                font-size: 15px;
+                font-weight: 700;
+                letter-spacing: -0.4px;
+                color: var(--text);
+            }
+            .c-card.best .c-value {
+                color: #248a3d;
+            }
+            .bar-track {
+                width: 100%;
+                height: 4px;
+                background-color: #e5e5ea;
+                border-radius: 10px;
+                margin-top: 5px;
+                overflow: hidden;
+            }
+            .bar-fill {
+                height: 4px;
+                border-radius: 10px;
+                background-color: #8e8e93;
+            }
+            .bar-fill.yellow-bar {
+                background-color: #ffcc00;
+            }
+            .bar-fill.red-bar {
+                background-color: #ff3b30;
+            }
+            .c-card.best .bar-fill {
+                background-color: #34c759;
+            }
+
+            /* ================= EVALUATION GRID ================= */
+            .eval-grid {
+                display: grid;
+                grid-template-columns: 11fr 9fr;
+                gap: 8px;
+            }
+            .eval-card {
+                background: rgba(245, 245, 247, 0.6);
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 6px 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            .eval-card-title {
+                font-size: 7.5px;
+                color: var(--slate);
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.3px;
+                margin-bottom: 2px;
+            }
+            .feat-importance {
+                display: flex;
+                flex-direction: column;
+                gap: 3px;
+            }
+            .feat-row {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 7.5px;
+            }
+            .feat-name {
+                width: 48px;
+                font-weight: 600;
+                color: var(--text-sec);
+            }
+            .feat-bar-track {
+                flex-grow: 1;
+                width: 100%;
+                height: 4px;
+                background-color: #e5e5ea;
+                border-radius: 2px;
+                overflow: hidden;
+                position: relative;
+            }
+            .feat-bar-fill {
+                display: block;
+                height: 100%;
+                background-color: #34c759;
+                border-radius: 2px;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .feat-val {
+                width: 22px;
+                text-align: right;
+                font-family: monospace;
+                font-weight: 700;
+                color: var(--text);
+            }
+            .clinical-eval {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(52, 199, 89, 0.04);
+                border: 1px solid rgba(52, 199, 89, 0.12);
+                border-radius: 8px;
+                padding: 4px 8px;
+                flex: 1;
+            }
+            .eval-kpi {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                border-right: 1px solid rgba(52, 199, 89, 0.15);
+                padding-right: 8px;
+                flex-shrink: 0;
+            }
+            .eval-val {
+                font-size: 13px;
+                font-weight: 700;
+                color: #248a3d;
+                line-height: 1.1;
+            }
+            .eval-label {
+                font-size: 6.5px;
+                color: var(--slate);
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+            .eval-text {
+                font-size: 7.5px;
+                color: var(--text-sec);
+                line-height: 1.35;
+            }
+
+            /* ================= INSIGHT BANNER ================= */
+            .insight-banner {
+                width: 100%;
+                background: linear-gradient(
+                    135deg,
+                    rgba(52, 199, 89, 0.08) 0%,
+                    rgba(255, 255, 255, 0.95) 100%
+                );
+                border: 1px solid rgba(52, 199, 89, 0.22);
+                border-radius: 14px;
+                padding: 10px 14px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                box-shadow: 0 8px 24px rgba(52, 199, 89, 0.06);
+                box-sizing: border-box;
+            }
+            .insight-header {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+            .insight-icon-wrap {
+                width: 22px;
+                height: 22px;
+                border-radius: 6px;
+                background: rgba(52, 199, 89, 0.12);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+            .insight-icon-wrap svg {
+                width: 12px;
+                height: 12px;
+                stroke: var(--blue-deep);
+                fill: none;
+                stroke-width: 2.2;
+            }
+            .insight-title {
+                font-size: 9.5px;
+                font-weight: 700;
+                color: var(--blue-deep);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            .insight-content-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            .insight-item {
+                display: flex;
+                gap: 6px;
+                background: rgba(255, 255, 255, 0.5);
+                border: 1px solid rgba(52, 199, 89, 0.08);
+                border-radius: 8px;
+                padding: 6px 8px;
+            }
+            .insight-item-icon {
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background: rgba(52, 199, 89, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                margin-top: 1px;
+            }
+            .insight-item-icon svg {
+                width: 8.5px;
+                height: 8.5px;
+                stroke: var(--blue);
+                fill: none;
+                stroke-width: 2.5;
+            }
+            .insight-text {
+                font-size: 7.8px;
+                color: var(--text-sec);
+                line-height: 1.35;
+            }
+            .insight-text b {
+                color: var(--text);
+                font-weight: 600;
+            }
+
+            .footer {
+                margin-top: auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 7px;
+                color: var(--slate);
+                border-top: 1px solid var(--border);
+                padding-top: 5px;
+            }
+            .footer .fname {
+                font-weight: 600;
+                color: var(--text-sec);
+            }
+
+            /* ================= DETAILED TABLE ================= */
+            .results-table-wrap {
+                margin-top: 4px;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                overflow: hidden;
+                background: rgba(245, 245, 247, 0.4);
+            }
+            .results-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 8.5px;
+                text-align: left;
+            }
+            .results-table th,
+            .results-table td {
+                padding: 5px 8px;
+                border-bottom: 1px solid var(--border);
+            }
+            .results-table th {
+                font-weight: 700;
+                color: var(--text);
+                font-size: 8px;
+                text-transform: uppercase;
+                letter-spacing: 0.3px;
+            }
+            .results-table tr:last-child td {
+                border-bottom: none;
+            }
+            .results-table tr.highlight-row {
+                background: rgba(52, 199, 89, 0.06);
+                font-weight: 600;
+            }
+            .results-table tr.highlight-row td {
+                color: var(--blue-deep);
+            }
+            .results-table .model-name {
+                font-weight: 600;
+                color: var(--text);
+            }
+            .results-table .metric-val {
+                font-family: monospace;
+                font-size: 8px;
+            }
+            .results-table .leakage-alert {
+                color: #ff9500;
+                font-weight: 600;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page">
+            <!-- HEADER -->
+            <div class="header">
+                <div class="header-text">
+                    <div class="eyebrow">
+                        Uji Sertifikasi Kompetensi Data Scientist (BNSP)
+                    </div>
+                    <h1>Hasil Eksperimen Prediksi Diabetes</h1>
+                    <div class="subtitle">
+                        Nama: <b>Alfaturachman Maulana Pahlevi</b> &nbsp;·&nbsp;
+                        NIM: <b>A11.2025.16609</b> &nbsp;·&nbsp; Skema:
+                        <b>Data Scientist</b><br />
+                        Dataset: <b>Pima Indians Diabetes</b>
+                    </div>
+                    <div class="pill">Skenario 3 · Optimized Pipeline</div>
+                </div>
+
+                <div class="header-logos">
+                    <img
+                        src="logo/logo_udinus.png"
+                        alt="Logo Udinus"
+                        class="header-logo-img"
+                    />
+                    <img
+                        src="logo/logo_lsp_udinus.png"
+                        alt="Logo LSP Udinus"
+                        class="header-logo-img"
+                    />
+                    <img
+                        src="logo/logo_bnsp.png"
+                        alt="Logo BNSP"
+                        class="header-logo-img"
+                    />
+                </div>
+            </div>
+
+            <!-- RINGKASAN DATA & MODEL (METRICS BAR) -->
+            <div style="margin-top: 8px">
+                <div class="section-title">
+                    <span class="dot"></span>Ringkasan Data &amp; Model
+                </div>
+                <div class="metrics-panel">
+                    <div class="metric-col">
+                        <svg
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                            <path
+                                d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"
+                            ></path>
+                            <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path>
+                        </svg>
+                        <div class="kpi-value">768</div>
+                        <div class="kpi-sub">baris · 9 kolom</div>
+                        <div class="kpi-label">Dataset awal</div>
+                    </div>
+                    <div class="metric-col">
+                        <svg
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <div class="kpi-value">768</div>
+                        <div class="kpi-sub">baris terproses</div>
+                        <div class="kpi-label">Data tervalidasi</div>
+                    </div>
+                    <div class="metric-col">
+                        <svg
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+                            ></path>
+                        </svg>
+                        <div class="kpi-value">376</div>
+                        <div class="kpi-sub">baris terimputasi</div>
+                        <div class="kpi-label">Imputasi Nol Klinis</div>
+                    </div>
+                    <div class="metric-col">
+                        <svg
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <line x1="4" y1="21" x2="4" y2="14"></line>
+                            <line x1="4" y1="10" x2="4" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12" y2="3"></line>
+                            <line x1="20" y1="21" x2="20" y2="16"></line>
+                            <line x1="20" y1="12" x2="20" y2="3"></line>
+                            <line x1="1" y1="14" x2="7" y2="14"></line>
+                            <line x1="9" y1="8" x2="15" y2="8"></line>
+                            <line x1="17" y1="16" x2="23" y2="16"></line>
+                        </svg>
+                        <div class="kpi-value">24</div>
+                        <div class="kpi-sub">fitur klinis</div>
+                        <div class="kpi-label">Fitur final</div>
+                    </div>
+                    <div class="metric-col">
+                        <svg
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <line x1="6" y1="3" x2="6" y2="15"></line>
+                            <circle cx="18" cy="6" r="3"></circle>
+                            <circle cx="6" cy="18" r="3"></circle>
+                            <path d="M18 9a9 9 0 0 1-9 9"></path>
+                        </svg>
+                        <div class="kpi-value">80/20</div>
+                        <div class="kpi-sub">rasio stratified</div>
+                        <div class="kpi-label">Split train/test</div>
+                    </div>
+                    <div class="metric-col highlight-col">
+                        <svg
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline
+                                points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"
+                            ></polyline>
+                        </svg>
+                        <div class="kpi-value" style="color: var(--blue-deep)">
+                            75,32%
+                        </div>
+                        <div class="kpi-sub">Accuracy (LightGBM)</div>
+                        <div class="kpi-label">Model Terbaik</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHIPS TEKNIK INTI -->
+            <div class="chip-row">
+                <span class="chip-label">Teknik Inti</span>
+                <span class="chip">KNN Imputer (k=5)</span>
+                <span class="chip">16 Composite Features</span>
+                <span class="chip">SMOTE Resampling</span>
+                <span class="chip">Optuna Bayesian Tuning</span>
+                <span class="chip">XGBoost</span>
+                <span class="chip">LightGBM</span>
+                <span class="chip">Random Forest</span>
+            </div>
+
+            <!-- WORKFLOW TIMELINE -->
+            <div style="margin-top: 8px">
+                <div class="section-title">
+                    <span class="dot"></span>Alur Kerja Eksperimen
+                </div>
+                <div class="timeline-grid">
+                    <div class="t-row">
+                        <div class="t-badge-circle">01</div>
+                        <div class="t-icon-circle">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" />
+                                <circle cx="12" cy="12" r="6" />
+                                <circle cx="12" cy="12" r="2" />
+                            </svg>
+                        </div>
+                        <div class="t-meta">
+                            <span class="t-code">J.62DMI00.001.1</span>
+                            <span class="t-title">Objektif Bisnis</span>
+                        </div>
+                        <div class="t-desc">
+                            1. <b>Skrining Cepat</b>: Deteksi dini risiko
+                            diabetes biner.<br />
+                            2. <b>Intervensi Dini</b>: Pencegahan sebelum
+                            komplikasi.<br />
+                            3. <b>Efisiensi Biaya</b>: Menekan biaya perawatan.
+                        </div>
+                    </div>
+                    <div class="t-row">
+                        <div class="t-badge-circle">02</div>
+                        <div class="t-icon-circle">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"
+                                />
+                                <line x1="4" y1="22" x2="4" y2="15" />
+                            </svg>
+                        </div>
+                        <div class="t-meta">
+                            <span class="t-code">J.62DMI00.002.1</span>
+                            <span class="t-title">Tujuan Teknis</span>
+                        </div>
+                        <div class="t-desc">
+                            Klasifikasi biner target 0/1, fokus pada
+                            <b>Accuracy &amp; ROC-AUC</b>, serta fitur klinis
+                            penting.
+                        </div>
+                    </div>
+                    <div class="t-row">
+                        <div class="t-badge-circle">03</div>
+                        <div class="t-icon-circle">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8" />
+                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            </svg>
+                        </div>
+                        <div class="t-meta">
+                            <span class="t-code">J.62DMI00.005.1</span>
+                            <span class="t-title">Menelaah Data</span>
+                        </div>
+                        <div class="t-desc">
+                            Analisis <b>768 baris &amp; 9 kolom</b> Pima Indians
+                            Dataset, dengan 0 tidak logis pada glucose, bp,
+                            skin, insulin, bmi.
+                        </div>
+                    </div>
+                    <div class="t-row">
+                        <div class="t-badge-circle">04</div>
+                        <div class="t-icon-circle">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                />
+                                <polyline points="9 11 11 13 15 9" />
+                            </svg>
+                        </div>
+                        <div class="t-meta">
+                            <span class="t-code">J.62DMI00.006.1</span>
+                            <span class="t-title">Memvalidasi Data</span>
+                        </div>
+                        <div class="t-desc">
+                            Cek konsistensi data klinis, mengidentifikasi 0
+                            tidak logis sebagai missing values yang memerlukan
+                            imputasi.
+                        </div>
+                    </div>
+                    <div class="t-row">
+                        <div class="t-badge-circle">05</div>
+                        <div class="t-icon-circle">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="22" y1="12" x2="18" y2="12" />
+                                <line x1="6" y1="12" x2="2" y2="12" />
+                                <line x1="12" y1="6" x2="12" y2="2" />
+                                <line x1="12" y1="22" x2="12" y2="18" />
+                            </svg>
+                        </div>
+                        <div class="t-meta">
+                            <span class="t-code">J.62DMI00.007.1</span>
+                            <span class="t-title">Menentukan Objek Data</span>
+                        </div>
+                        <div class="t-desc">
+                            X = 8 fitur klinis sebelum rekayasa; y = target
+                            diabetes (0 = sehat, 1 = diabetes).
+                        </div>
+                    </div>
+                    <div class="t-row">
+                        <div class="t-badge-circle">06</div>
+                        <div class="t-icon-circle">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path d="m20 20-3-3" />
+                                <path d="M12 14.5 16 19" />
+                                <path d="M14 11 19 16" />
+                                <path
+                                    d="M12 21 4 13a2 2 0 0 1 0-2.83l6.5-6.5a2 2 0 0 1 2.83 0l8 8"
+                                />
+                                <path d="M8 7 3 2" />
+                                <path d="M5 10 2 7" />
+                            </svg>
+                        </div>
+                        <div class="t-meta">
+                            <span class="t-code">J.62DMI00.008.1</span>
+                            <span class="t-title">Membersihkan Data</span>
+                        </div>
+                        <div class="t-desc">
+                            Mengganti nilai 0 tidak logis dengan
+                            <b
+                                >KNN Imputer (k=5) secara legal di dalam
+                                pipeline lipatan CV</b
+                            >
+                            untuk mencegah target leakage.
+                        </div>
+                    </div>
+                    <div class="t-row">
+                        <div class="t-badge-circle">07</div>
+                        <div class="t-icon-circle">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="4" y1="21" x2="4" y2="14" />
+                                <line x1="4" y1="10" x2="4" y2="3" />
+                                <line x1="12" y1="21" x2="12" y2="12" />
+                                <line x1="12" y1="8" x2="12" y2="3" />
+                                <line x1="20" y1="21" x2="20" y2="16" />
+                                <line x1="20" y1="12" x2="20" y2="3" />
+                                <line x1="1" y1="14" x2="7" y2="14" />
+                                <line x1="9" y1="8" x2="15" y2="8" />
+                                <line x1="17" y1="16" x2="23" y2="16" />
+                            </svg>
+                        </div>
+                        <div class="t-meta">
+                            <span class="t-code">J.62DMI00.009.1</span>
+                            <span class="t-title">Mengkonstruksi Data</span>
+                        </div>
+                        <div class="t-desc">
+                            Membuat <b>16 fitur komposit klinis baru</b> dan
+                            standardisasi yang
+                            <b>diterapkan per lipatan CV</b> di Skenario 3.
+                        </div>
+                    </div>
+                    <div class="t-row">
+                        <div class="t-badge-circle">08</div>
+                        <div class="t-icon-circle">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="6" y1="3" x2="6" y2="15" />
+                                <circle cx="18" cy="6" r="3" />
+                                <circle cx="6" cy="18" r="3" />
+                                <path d="M18 9a9 9 0 0 1-9 9" />
+                            </svg>
+                        </div>
+                        <div class="t-meta">
+                            <span class="t-code">J.62DMI00.012.1</span>
+                            <span class="t-title"
+                                >Membangun Skenario Model</span
+                            >
+                        </div>
+                        <div class="t-desc">
+                            Skema <b>Stratified 5-Fold CV</b> dengan
+                            penyeimbangan kelas dan
+                            <b>Optuna Bayesian Tuning</b> secara terisolasi per
+                            lipatan training.
+                        </div>
+                    </div>
+                    <div class="t-row">
+                        <div class="t-badge-circle">09</div>
+                        <div class="t-icon-circle">
+                            <svg viewBox="0 0 24 24">
+                                <polyline
+                                    points="22 12 18 12 15 21 9 3 6 12 2 12"
+                                />
+                            </svg>
+                        </div>
+                        <div class="t-meta">
+                            <span class="t-code">J.62DMI00.013.1</span>
+                            <span class="t-title">Membangun Model</span>
+                        </div>
+                        <div class="t-desc">
+                            Melatih model akhir
+                            <b>LightGBM (Optimized)</b> memakai hyperparameter
+                            terbaik hasil tuning Optuna pada Skenario 3.
+                        </div>
+                    </div>
+                    <div class="t-row col-span-3">
+                        <div class="t-badge-circle">10</div>
+                        <div class="t-icon-circle">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 3v18h18" />
+                                <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
+                            </svg>
+                        </div>
+                        <div class="t-meta">
+                            <span class="t-code">J.62DMI00.014.1</span>
+                            <span class="t-title">Mengevaluasi Model</span>
+                        </div>
+                        <div class="t-desc">
+                            Mengevaluasi performa final Skenario 3 (LightGBM)
+                            pada test set, mencapai <b>75,32% Accuracy</b> dan
+                            <b>81,70% ROC-AUC</b>.
+                        </div>
+                    </div>
+                    <div class="t-row col-span-3">
+                        <div class="t-badge-circle">11</div>
+                        <div class="t-icon-circle">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+                                />
+                                <rect
+                                    x="8"
+                                    y="2"
+                                    width="8"
+                                    height="4"
+                                    rx="1"
+                                    ry="1"
+                                />
+                            </svg>
+                        </div>
+                        <div class="t-meta">
+                            <span class="t-code">J.62DMI00.015.1</span>
+                            <span class="t-title">Review Pemodelan</span>
+                        </div>
+                        <div class="t-desc">
+                            Mengonfirmasi keberhasilan Skenario 3 yang bebas
+                            dari efek <i>target leakage</i> semu seperti pada
+                            Skenario 2 (Akurasi 90,50%).
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- MODEL RESULTS TABLE -->
+            <div style="margin-top: 8px">
+                <div class="section-title">
+                    <span class="dot"></span>Hasil Performa Eksperimen Notebook
+                    (4 Model)
+                </div>
+                <div class="results-table-wrap">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th style="background: rgba(0, 0, 0, 0.02)">
+                                    Skenario 1 (Split-First)<br /><span
+                                        style="
+                                            font-size: 7px;
+                                            font-weight: normal;
+                                        "
+                                        >Accuracy | AUC</span
+                                    >
+                                </th>
+                                <th
+                                    style="
+                                        background: rgba(255, 149, 0, 0.05);
+                                        color: #ff9500;
+                                    "
+                                >
+                                    Skenario 2 (Leakage)<br /><span
+                                        style="
+                                            font-size: 7px;
+                                            font-weight: normal;
+                                        "
+                                        >Accuracy | AUC</span
+                                    >
+                                </th>
+                                <th
+                                    style="
+                                        background: rgba(52, 199, 89, 0.05);
+                                        color: var(--blue-deep);
+                                    "
+                                >
+                                    Skenario 3 (Optimized)<br /><span
+                                        style="
+                                            font-size: 7px;
+                                            font-weight: normal;
+                                        "
+                                        >Accuracy | AUC</span
+                                    >
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight-row">
+                                <td class="model-name">LightGBM</td>
+                                <td
+                                    class="metric-val"
+                                    style="background: rgba(0, 0, 0, 0.02)"
+                                >
+                                    73.38% &nbsp;|&nbsp; 80.19%
+                                </td>
+                                <td
+                                    class="metric-val leakage-alert"
+                                    style="background: rgba(255, 149, 0, 0.05)"
+                                >
+                                    90.50% &nbsp;|&nbsp; 96.44%
+                                </td>
+                                <td
+                                    class="metric-val"
+                                    style="
+                                        background: rgba(52, 199, 89, 0.05);
+                                        font-weight: 700;
+                                    "
+                                >
+                                    75.32% &nbsp;|&nbsp; 81.70%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="model-name">XGBoost</td>
+                                <td
+                                    class="metric-val"
+                                    style="background: rgba(0, 0, 0, 0.02)"
+                                >
+                                    72.08% &nbsp;|&nbsp; 80.76%
+                                </td>
+                                <td
+                                    class="metric-val leakage-alert"
+                                    style="background: rgba(255, 149, 0, 0.05)"
+                                >
+                                    89.50% &nbsp;|&nbsp; 95.95%
+                                </td>
+                                <td
+                                    class="metric-val"
+                                    style="background: rgba(52, 199, 89, 0.05)"
+                                >
+                                    72.08% &nbsp;|&nbsp; 80.76%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="model-name">Gradient Boosting</td>
+                                <td
+                                    class="metric-val"
+                                    style="background: rgba(0, 0, 0, 0.02)"
+                                >
+                                    72.08% &nbsp;|&nbsp; 81.06%
+                                </td>
+                                <td
+                                    class="metric-val leakage-alert"
+                                    style="background: rgba(255, 149, 0, 0.05)"
+                                >
+                                    90.50% &nbsp;|&nbsp; 96.86%
+                                </td>
+                                <td
+                                    class="metric-val"
+                                    style="background: rgba(52, 199, 89, 0.05)"
+                                >
+                                    72.08% &nbsp;|&nbsp; 81.06%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="model-name">Random Forest</td>
+                                <td
+                                    class="metric-val"
+                                    style="background: rgba(0, 0, 0, 0.02)"
+                                >
+                                    69.48% &nbsp;|&nbsp; 79.31%
+                                </td>
+                                <td
+                                    class="metric-val leakage-alert"
+                                    style="background: rgba(255, 149, 0, 0.05)"
+                                >
+                                    91.00% &nbsp;|&nbsp; 96.84%
+                                </td>
+                                <td
+                                    class="metric-val"
+                                    style="background: rgba(52, 199, 89, 0.05)"
+                                >
+                                    69.48% &nbsp;|&nbsp; 79.31%
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- COMPARISON -->
+            <div style="margin-top: 8px">
+                <div class="section-title">
+                    <span class="dot"></span>Perbandingan Performa Eksperimen
+                    (Accuracy)
+                </div>
+                <div class="compare-grid">
+                    <!-- Eksperimen 1 -->
+                    <div class="c-card">
+                        <div class="c-label">Eksperimen 01</div>
+                        <div class="c-content-wrap">
+                            <svg class="mini-chart" viewBox="0 0 40 40">
+                                <rect
+                                    x="5"
+                                    y="15"
+                                    width="7"
+                                    height="25"
+                                    rx="1.5"
+                                    fill="#ffcc00"
+                                />
+                                <rect
+                                    x="16.5"
+                                    y="10"
+                                    width="7"
+                                    height="30"
+                                    rx="1.5"
+                                    fill="#8e8e93"
+                                    opacity="0.2"
+                                />
+                                <rect
+                                    x="28"
+                                    y="8"
+                                    width="7"
+                                    height="32"
+                                    rx="1.5"
+                                    fill="#8e8e93"
+                                    opacity="0.2"
+                                />
+                            </svg>
+                            <div class="c-info">
+                                <div class="c-exp">Split-First (Baseline)</div>
+                                <div class="c-value">73,38%</div>
+                            </div>
+                        </div>
+                        <div class="bar-track">
+                            <div
+                                class="bar-fill yellow-bar"
+                                style="width: 73.38%"
+                            ></div>
+                        </div>
+                    </div>
+
+                    <!-- Eksperimen 2 -->
+                    <div class="c-card">
+                        <div class="c-label">Eksperimen 02</div>
+                        <div class="c-content-wrap">
+                            <svg class="mini-chart" viewBox="0 0 40 40">
+                                <rect
+                                    x="5"
+                                    y="15"
+                                    width="7"
+                                    height="25"
+                                    rx="1.5"
+                                    fill="#8e8e93"
+                                    opacity="0.2"
+                                />
+                                <rect
+                                    x="16.5"
+                                    y="10"
+                                    width="7"
+                                    height="30"
+                                    rx="1.5"
+                                    fill="#ff3b30"
+                                />
+                                <rect
+                                    x="28"
+                                    y="8"
+                                    width="7"
+                                    height="32"
+                                    rx="1.5"
+                                    fill="#8e8e93"
+                                    opacity="0.2"
+                                />
+                            </svg>
+                            <div class="c-info">
+                                <div class="c-exp">
+                                    Preprocess-First (Leakage)
+                                </div>
+                                <div class="c-value">90,50%</div>
+                            </div>
+                        </div>
+                        <div class="bar-track">
+                            <div
+                                class="bar-fill red-bar"
+                                style="width: 90.5%"
+                            ></div>
+                        </div>
+                    </div>
+
+                    <!-- Eksperimen 3 -->
+                    <div class="c-card best">
+                        <div class="c-badge">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                                /></svg
+                            >BEST
+                        </div>
+                        <div class="c-label">Eksperimen 03</div>
+                        <div class="c-content-wrap">
+                            <svg class="mini-chart" viewBox="0 0 40 40">
+                                <rect
+                                    x="5"
+                                    y="15"
+                                    width="7"
+                                    height="25"
+                                    rx="1.5"
+                                    fill="#8e8e93"
+                                    opacity="0.2"
+                                />
+                                <rect
+                                    x="16.5"
+                                    y="10"
+                                    width="7"
+                                    height="30"
+                                    rx="1.5"
+                                    fill="#8e8e93"
+                                    opacity="0.2"
+                                />
+                                <rect
+                                    x="28"
+                                    y="8"
+                                    width="7"
+                                    height="32"
+                                    rx="1.5"
+                                    fill="#34c759"
+                                />
+                            </svg>
+                            <div class="c-info">
+                                <div class="c-exp">LightGBM (Optimized)</div>
+                                <div class="c-value">75,32%</div>
+                            </div>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 75.32%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FITUR & EVALUASI KLINIS -->
+            <div style="margin-top: 4px">
+                <div class="section-title">
+                    <span class="dot"></span>Analisis Fitur &amp; Evaluasi
+                    Klinis
+                </div>
+                <div class="eval-grid">
+                    <!-- Column 1: Feature Importance -->
+                    <div class="eval-card">
+                        <div class="eval-card-title">
+                            Top 4 Fitur Terpenting (Feature Importance)
+                        </div>
+                        <div class="feat-importance">
+                            <div class="feat-row">
+                                <span class="feat-name">Glucose</span>
+                                <div class="feat-bar-track">
+                                    <div
+                                        class="feat-bar-fill"
+                                        style="width: 32%"
+                                    ></div>
+                                </div>
+                                <span class="feat-val">32%</span>
+                            </div>
+                            <div class="feat-row">
+                                <span class="feat-name">BMI</span>
+                                <div class="feat-bar-track">
+                                    <div
+                                        class="feat-bar-fill"
+                                        style="width: 24%"
+                                    ></div>
+                                </div>
+                                <span class="feat-val">24%</span>
+                            </div>
+                            <div class="feat-row">
+                                <span class="feat-name">Age</span>
+                                <div class="feat-bar-track">
+                                    <div
+                                        class="feat-bar-fill"
+                                        style="width: 18%"
+                                    ></div>
+                                </div>
+                                <span class="feat-val">18%</span>
+                            </div>
+                            <div class="feat-row">
+                                <span class="feat-name">Gluc×BMI</span>
+                                <div class="feat-bar-track">
+                                    <div
+                                        class="feat-bar-fill"
+                                        style="width: 14%"
+                                    ></div>
+                                </div>
+                                <span class="feat-val">14%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column 2: Clinical Evaluation -->
+                    <div class="eval-card">
+                        <div class="eval-card-title">
+                            Fokus Metrik Klinis (Skenario 3)
+                        </div>
+                        <div class="clinical-eval">
+                            <div class="eval-kpi">
+                                <div class="eval-val">74,07%</div>
+                                <div class="eval-label">Recall</div>
+                            </div>
+                            <div class="eval-text">
+                                Sensitivitas tinggi meminimalkan pasien diabetes
+                                terlewat (<i>False Negative</i>), sangat vital
+                                untuk penapisan awal medis.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INSIGHT UTAMA -->
+            <div class="insight-banner">
+                <div class="insight-header">
+                    <div class="insight-icon-wrap">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .3 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+                            ></path>
+                            <line x1="9" y1="18" x2="15" y2="18"></line>
+                            <line x1="10" y1="22" x2="14" y2="22"></line>
+                        </svg>
+                    </div>
+                    <span class="insight-title"
+                        >Temuan Utama &amp; Analisis Eksperimen</span
+                    >
+                </div>
+                <div class="insight-content-grid">
+                    <div class="insight-item">
+                        <div class="insight-item-icon">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <p class="insight-text">
+                            Sebanyak <b>376 baris data</b> memiliki nilai 0
+                            tidak logis pada fitur vital, memerlukan
+                            <i>class-conditional imputation</i> agar model tidak
+                            bias.
+                        </p>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-item-icon">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <p class="insight-text">
+                            Eksperimen 2 membuktikan
+                            <i>target leakage</i> mendongkrak performa semu
+                            hingga <b>96,86% ROC-AUC</b>, yang berbahaya untuk
+                            diagnosis klinis.
+                        </p>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-item-icon">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <p class="insight-text">
+                            Tuning Optuna pada
+                            <b>LightGBM</b>
+                            bebas leakage berhasil mencapai
+                            <b>75,32% Accuracy</b> secara valid untuk deployment
+                            nyata.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER REMOVED -->
+        </div>
+    </body>
+</html>
