@@ -483,15 +483,22 @@
             margin-top: 1px;
         }
 
-        /* CARD PANELS */
+        /* CARD PANELS (APPLE HIG INSET GROUPED CARD) */
         .card-panel {
             background: #ffffff;
-            border: 1px solid var(--border-light);
-            border-radius: 14px;
-            padding: 12px 14px;
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            padding: 16px 18px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04), 0 2px 6px rgba(15, 23, 42, 0.02);
             display: flex;
             flex-direction: column;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-panel:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.07);
+            transform: translateY(-1px);
         }
 
         /* SKKNI 11 STEPS GRID (COLUMN-FIRST FLOW: 1-6 LEFT, 7-11 RIGHT) */
@@ -602,7 +609,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .winner-card {
