@@ -10,9 +10,9 @@ Dokumentasi ini merupakan berkas master repositori untuk memenuhi syarat kelayak
 
 - **Nama**: Alfaturachman Maulana Pahlevi
 - **NIM**: A11.2025.16609
-- **Kelas**: D.2.J
-- **Program**: Workshop & Sertifikasi Data Scientist
+- **Program**: Workshop & Uji Sertifikasi Data Scientist
 - **Skema Sertifikasi**: Ilmuwan Data (Data Scientist)
+- **Lembaga Sertifikasi**: Badan Nasional Sertifikasi Profesi (BNSP)
 - **Tahun**: 2026
 
 ---
@@ -23,7 +23,6 @@ Dokumentasi ini merupakan berkas master repositori untuk memenuhi syarat kelayak
 d:/project sertifikasi/
 │
 ├── readme.md                   <- Dokumentasi master repositori & pemetaan BNSP (berkas ini)
-├── index.html                  <- Dashboard Infografis Eksekutif (Apresiasi Desain & Ringkasan Eksperimen)
 │
 ├── stroke/                     <- Proyek Utama: Skrining Risiko Stroke Posbindu PTM Kota Semarang
 │   ├── stroke.csv              <- Dataset Rekam Medis Posbindu (10.000 sampel × 10 fitur)
@@ -77,22 +76,6 @@ Tabel berikut menunjukkan perbandingan pendekatan metodologis, rekayasa fitur, m
 
 - **Masalah Utama**: Inkonsistensi data antar 4 cohort regional (Cleveland, Hungarian, Switzerland, VA Long Beach).
 - **Metode Solusi**: Mengubah kolesterol bernilai `0` pada cohort Swiss/VA menjadi `NaN` lalu mengimputasinya dengan median kohort. Outlier removal via **Isolation Forest** membuktikan data ekstrem medis merupakan sinyal patologis parah penyakit jantung yang berharga dan tidak boleh dihapus.
-
----
-
-## Executive Dashboard (`index.html`)
-
-Repositori ini dilengkapi dengan berkas **`index.html`** yang merupakan infografis web visual interaktif yang berfungsi sebagai lembar ringkasan eksekutif (_Executive Summary Sheet_).
-
-- **Desain**: Minimalis, elegan, berpusat pada kegunaan, mengadopsi bahasa desain **Apple Human Interface Guidelines (HIG)** dengan palet warna HSL premium (iOS Blue, iOS Slate, Green, Dark Grey).
-- **Fitur Visual**:
-    - _DNA helix & Medical ECG vector header illustrations_ (SVG asli).
-    - _Unified Metrics Panel_ (6 metrik dataset dan model kunci dengan ikon SVG inline).
-    - _Experiment Comparison Grid_ dilengkapi dengan representasi visual mini-charts dinamis.
-    - _Interactive Workflow Steps_ (Tahapan 1-11 dipetakan dalam 3-kolom grid yang rapi dan responsif).
-    - _Insight Utama Banner_ yang menyoroti temuan kritis eksperimental secara informatif.
-
-Untuk membukanya, cukup klik dua kali berkas `index.html` pada peramban (_web browser_) Anda.
 
 ---
 
