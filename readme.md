@@ -12,6 +12,8 @@ Dokumentasi ini merupakan berkas master repositori untuk memenuhi syarat kelayak
 - **NIM**: A11.2025.16609
 - **Kelas**: D.2.J
 - **Program**: Workshop & Sertifikasi Data Scientist
+- **Skema Sertifikasi**: Ilmuwan Data (Data Scientist)
+- **Tahun**: 2026
 
 ---
 
@@ -23,22 +25,17 @@ d:/project sertifikasi/
 ├── readme.md                   <- Dokumentasi master repositori & pemetaan BNSP (berkas ini)
 ├── index.html                  <- Dashboard Infografis Eksekutif (Apresiasi Desain & Ringkasan Eksperimen)
 │
+├── stroke/                     <- Proyek Utama: Skrining Risiko Stroke Posbindu PTM Kota Semarang
+│   ├── stroke.csv              <- Dataset Rekam Medis Posbindu (10.000 sampel × 10 fitur)
+│   ├── Stroke-Prediction.ipynb <- Notebook Jupyter (CRISP-DM & 11 Unit SKKNI Leak-Free Pipeline)
+│   └── readme.md               <- Dokumentasi rinci proyek stroke & audit kritis jurnal Scopus Q1
+│
 ├── diabetes/                   <- Proyek A: Klasifikasi Penyakit Diabetes Mellitus
 │   ├── diabetes.csv            <- Pima Indians Diabetes Dataset (768 baris × 9 kolom)
 │   ├── Diabetes_Prediction.ipynb <- Notebook Jupyter (Imputasi Bersyarat, Rekayasa Fitur, Ensemble, Optuna)
 │   └── readme.md               <- Dokumentasi rinci proyek diabetes & replikasi jurnal
 │
-├── chronic kidney disease/     <- Proyek B: Deteksi Penyakit Ginjal Kronis (CKD)
-│   ├── kidney_disease.csv      <- Dataset CKD dari UCI ML Repository (400 baris × 25 kolom)
-│   ├── Kidney_Disease.ipynb    <- Notebook Jupyter (K-Means Stratified Split, Polynomial Features)
-│   └── readme.md               <- Dokumentasi rinci proyek ginjal & evaluasi homogenitas
-│
-├── breast cancer/              <- Proyek C: Klasifikasi Tumor Payudara Wisconsin (WDBC)
-│   ├── breast_cancer.csv       <- Dataset Wisconsin Diagnostic Breast Cancer (569 baris × 32 kolom)
-│   ├── Breast_Cancer.ipynb     <- Notebook Jupyter (Interpretable Logistic Regression, SVM, KNN, RF)
-│   └── readme.md               <- Dokumentasi rinci interpretasi koefisien klinis
-│
-└── heart_disease/              <- Proyek D: Deteksi Penyakit Jantung (UCI 4 Regional Cohort)
+└── heart_disease/              <- Proyek B: Deteksi Penyakit Jantung (UCI 4 Regional Cohort)
     ├── heart.csv               <- Dataset Penyakit Jantung Cleveland, Hungarian, Swiss, VA (920 baris)
     ├── Heart_Disease.ipynb     <- Notebook Jupyter (Outlier Isolation Forest, Multiregional Imputation)
     └── readme.md               <- Dokumentasi rinci proyek jantung & pemetaan kompetensi
@@ -50,55 +47,42 @@ d:/project sertifikasi/
 
 Tabel berikut menunjukkan perbandingan pendekatan metodologis, rekayasa fitur, model terbaik, dan performa evaluasi pada data uji (_held-out test set_) untuk masing-masing proyek di dalam repositori:
 
-| Proyek Klasifikasi         | Dataset & Sampel           | Algoritma Utama & Model Terbaik             | Metrik Utama (Test Set)                                           | Inovasi / Fitur Kunci                                                                        | Jurnal Acuan                              |
-| :------------------------- | :------------------------- | :------------------------------------------ | :---------------------------------------------------------------- | :------------------------------------------------------------------------------------------- | :---------------------------------------- |
-| **Diabetes Prediction**    | Pima Indians (768 baris)   | LightGBM (Optimized)                        | **Accuracy**: 75.32%<br>**ROC-AUC**: 81.70%                       | KNN Imputer (k=5), 16 Composite Features, Optuna Hyperparameter Tuning                       | Ali et al. (Minia Univ, Egypt - 2025)     |
-| **Chronic Kidney Disease** | UCI CKD (400 baris)        | Random Forest, SVM, XGBoost, & Logistic Reg | **Accuracy**: 98.75% (Valid)<br>**ROC-AUC**: 1.0000 (Valid)         | Feature-Based K-Means Stratified Split, Polynomial Features (Degree 2) + Pembuktian Data Leakage | Dong Phuong et al. (Bioinformatics, 2025) |
-| **Breast Cancer**          | WDBC Wisconsin (569 baris) | L2-Regularized Logistic Regression          | **Accuracy**: 98.25%<br>**F1-Score**: 97.56%                      | Z-Score Scaler terpisah, Transparansi Koefisien Ko-Variat untuk Interpretasi Medis           | Cheng & Yu (medRxiv Preprint, 2025)       |
-| **Heart Disease**          | UCI 4 Kohort (920 baris)   | XGBoost Classifier (Eksperimen 1)           | **Accuracy**: 81.52%<br>**Recall**: 83.01%<br>**AUC-ROC**: 0.8765 | Multi-cohort Imputation (convert Chol=0 to NaN), Outlier Removal Analysis (Isolation Forest) | Tabassum et al. (Scopus Q2, 2025)         |
+| Proyek Klasifikasi | Dataset & Sampel | Algoritma Utama & Model Terbaik | Metrik Utama (Test Set) | Inovasi / Fitur Kunci | Jurnal Acuan |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Stroke Risk Screening** | Rekam Medis Posbindu (10.000 baris × 10 fitur) | **Logistic Regression Pipeline** *(Best Overall)* | **Recall**: 76,51%<br>**F1-Score**: 0,6538<br>**PR-AUC**: 0,7245 | **0% Leakage Guarantee** (Split 80:20 awal), ImbPipeline SMOTE + 5-Fold Stratified CV + GridSearchCV, SHAP TreeExplainer, Audit Confusion Matrix Paper Acuan (+11,55% lebih unggul). | Tang et al. (*Frontiers in Neurology*, Scopus Q1 2026) |
+| **Diabetes Prediction** | Pima Indians (768 baris) | LightGBM (Optimized) | **Accuracy**: 75.32%<br>**ROC-AUC**: 81.70% | KNN Imputer (k=5), 16 Composite Features, Optuna Hyperparameter Tuning | Ali et al. (Minia Univ, Egypt - 2025) |
+| **Heart Disease** | UCI 4 Kohort (920 baris) | XGBoost Classifier (Eksperimen 1) | **Accuracy**: 81.52%<br>**Recall**: 83.01%<br>**AUC-ROC**: 0.8765 | Multi-cohort Imputation (convert Chol=0 to NaN), Outlier Removal Analysis (Isolation Forest) | Tabassum et al. (Scopus Q2, 2025) |
 
 ---
 
 ## Penjelasan Detail Eksperimen & Metodologi
 
-### 1. Prediksi Diabetes Mellitus (Pima Indians)
+### 1. Skrining Risiko Stroke Posbindu PTM Kota Semarang (Replikasi & Audit Frontiers in Neurology 2026)
+
+- **Masalah Utama**: Deteksi dini risiko stroke medis pada 10.000 sampel rekam medis Posbindu PTM Kota Semarang dengan *class imbalance* (29,78% kejadian stroke). Banyak studi acuan terjangkit *data leakage* (kebocoran data) akibat imputasi/oversampling global sebelum pembagian data train-test.
+- **Metode Solusi**:
+  1. **Alur 11 Unit SKKNI Data Scientist**: Menerapkan alur CRISP-DM & 11 Unit SKKNI secara penuh, diawali *Stratified 80:20 Train-Test Split* di awal (Unit 08: `J.62DMI00.012.1`) untuk menjamin **0% Data Leakage**.
+  2. **Pipeline Bebas Leakage**: Mengintegrasikan `ColumnTransformer` (Imputasi Median terisolasi + `StandardScaler` + `OneHotEncoder`) dan `ImbPipeline` (SMOTE + 5-Fold Stratified Cross Validation + `GridSearchCV`).
+  3. **Model Terbaik**: **Logistic Regression Pipeline** meraih metrik klinis tertinggi dengan **Recall 76,51%**, **F1-Score 0,6538**, dan **PR-AUC 0,7245**.
+  4. **Audit Kritis Paper Acuan**: Audit Confusion Matrix terhadap paper Tang et al. (*Frontiers in Neurology*, 2026) membuktikan F1-score sejati paper acuan sebenarnya hanyalah **0,5861** (bukan 0,74 sebagaimana diklaim akibat kebocoran data). Model eksperimen ini terbukti **+11,55% lebih unggul secara valid**.
+  5. **Interpretabilitas & Rekomendasi Medis**: Analisis SHAP TreeExplainer menempatkan *Hipertensi* (mean |SHAP| 0,9087) dan *Penyakit Jantung* (0,4574) sebagai prediktor utama. Rekomendasi threshold klinis Posbindu ditetapkan pada **0.35** (Skrining Massal, Recall >85%), **0.50** (Standar Puskesmas, F1 Max 0.6538), dan **0.65** (Rujukan Spesialis, Precision >75%).
+
+### 2. Prediksi Diabetes Mellitus (Pima Indians)
 
 - **Masalah Utama**: Adanya nilai `0` tidak logis pada indikator vital medis (`Glucose`, `BloodPressure`, `SkinThickness`, `Insulin`, `BMI`) yang jika diabaikan atau diimputasi secara global akan mendistorsi prediksi.
-- **Metode Solusi**: Menangani nilai nol sebagai data hilang (_missing value_) menggunakan **KNN Imputer (k=5)** (pada skenario legal untuk menghindari mismatch train-test). Rekayasa **16 Fitur Komposit** (contoh: indeks metabolisme insulin, interaksi glukosa-usia) dilakukan untuk menangkap korelasi non-linier fitur.
-- **Pencegahan Data Leakage (Kebocoran Data)**:
-  Eksperimen ini secara krusial menguji dampak data leakage melalui 3 skenario:
-    1.  **Skenario 1 (Split-First)**: Pembagian train-test secara aman terlebih dahulu sebelum imputasi dengan KNN Imputer (k=5). ROC-AUC: **80.19%** dengan Akurasi **73.38%**.
-    2.  **Skenario 2 (Preprocess-First - LEAKAGE)**: Imputasi bersyarat target secara global dan SMOTE dilakukan secara global sebelum data dibagi. Hal ini memberikan hasil tinggi palsu (**ROC-AUC 96.44% / Akurasi 90.50%**), yang membuktikan target leakage berbahaya jika diterapkan pada keputusan medis riil (mereplikasi metodologi bias dari jurnal acuan).
-    3.  **Skenario 3 (Optimized)**: Skenario Split-First yang dioptimalkan secara legal menggunakan hyperparameter tuning berbasis **Optuna Bayesian Optimization** (5-Fold CV pada training set). ROC-AUC naik secara valid menjadi **81.70%** dengan Akurasi **75.32%**.
+- **Metode Solusi**: Menangani nilai nol sebagai data hilang (_missing value_) menggunakan **KNN Imputer (k=5)**. Rekayasa **16 Fitur Komposit** dilakukan untuk menangkap korelasi non-linier fitur.
+- **Pencegahan Data Leakage**: Pengujian 3 skenario membuktikan Split-First yang dioptimalkan secara legal menggunakan Optuna Bayesian Optimization menghasilkan ROC-AUC **81.70%** dengan Akurasi **75.32%**.
 
-### 2. Deteksi Penyakit Ginjal Kronis (CKD)
+### 3. Prediksi Penyakit Jantung (UCI 4 Kohort)
 
-- **Masalah Utama**: Heterogenitas pembagian data acak (train-test split) yang dapat memicu bias evaluasi kinerja pada dataset berdimensi tinggi dengan banyak fitur kategorikal, serta pembuktian ilmiah klaim akurasi sempurna 100% pada jurnal acuan.
-- **Metode Solusi**: Penerapan **Feature-Based Stratified Splitting Combined With K-Means Clustering** (K-Stratified Split) dan **Polynomial Features (Degree 2)**.
-- **Pencegahan Data Leakage (Kebocoran Data)**:
-  Eksperimen ini secara krusial menguji dampak data leakage melalui 3 skenario:
-    1.  **Skenario 1 (Split-First)**: Pembagian train-test secara aman terlebih dahulu sebelum preprocessing terpisah (imputasi, polynomial, scaling). SVM dan Logistic Regression mencapai **Akurasi 98.75%** dan **ROC-AUC 1.0000** secara valid.
-    2.  **Skenario 2 (Preprocess-First - LEAKAGE)**: Seluruh preprocessing dilakukan secara global sebelum data di-split dengan K-means stratified split. Ini mereplikasi pola kebocoran data (*data leakage*) jurnal acuan, menghasilkan akurasi artifisial **100.00%** pada Logistic Regression dan SVM.
-    3.  **Skenario 3 (Optimized)**: Skenario Split-First yang dioptimalkan secara legal menggunakan hyperparameter tuning berbasis **Optuna** secara cross-validation. Model SVM terbaik stabil pada **Akurasi 98.75%** dan **ROC-AUC 1.0000** bebas dari kebocoran data.
-- **Hasil**: Homogenitas pembagian data terbukti sangat tinggi (tervalidasi lewat tes Kolmogorov-Smirnov). Replikasi membuktikan klaim akurasi sempurna 100% pada jurnal acuan disebabkan oleh kebocoran data global. Performa riil model tanpa leakage adalah 98.75%.
-
-### 3. Klasifikasi Tumor Payudara Wisconsin (WDBC)
-
-- **Masalah Utama**: Keengganan praktisi medis menggunakan model black-box (seperti Deep Learning atau Ensemble kompleks) karena tidak adanya penjelasan rasio odds klinis.
-- **Metode Solusi**: Replikasi **Logistic Regression (LR) Framework** dengan regularisasi L2 (Ridge) untuk mencegah multikolinearitas antar 30 metrik seluler tumor.
-- **Hasil & Interpretasi**: Model mencapai akurasi test sebesar **98.25%**, bersaing ketat dengan SVM RBF (**98.25%**) dan Random Forest (**97.37%**). Koefisien model LR memberikan interpretasi medis instan: fitur `worst area` dan `radius error` memiliki koefisien positif terbesar, yang secara langsung berkorelasi dengan peningkatan probabilitas tumor ganas (_malignant_).
-
-### 4. Prediksi Penyakit Jantung (UCI 4 Kohort)
-
-- **Masalah Utama**: Inkonsistensi data antar 4 cohort regional (Cleveland, Hungarian, Switzerland, VA Long Beach), khususnya tingginya missing values pada kolom `ca` (pembuluh darah) dan `thal` (thalasemia), serta anomali pembacaan nilai kolesterol `0`.
-- **Metode Solusi**: Mengubah kolesterol bernilai `0` pada cohort Swiss/VA menjadi `NaN` lalu mengimputasinya dengan median kohort. Proyek ini membandingkan kinerja model tanpa outlier versus dengan outlier removal menggunakan **Isolation Forest** (contamination=3%).
-- **Temuan Kunci**: Penghapusan outlier justru menurunkan performa model (Akurasi XGBoost turun dari **81.52% ke 77.54%**; Recall turun dari **83.01% ke 73.21%**). Secara klinis, disimpulkan bahwa data ekstrem (outlier numerik seperti oldpeak atau tekanan darah sangat tinggi) merupakan sinyal patologis parah penyakit jantung yang sangat berharga dan tidak boleh dihapus.
+- **Masalah Utama**: Inkonsistensi data antar 4 cohort regional (Cleveland, Hungarian, Switzerland, VA Long Beach).
+- **Metode Solusi**: Mengubah kolesterol bernilai `0` pada cohort Swiss/VA menjadi `NaN` lalu mengimputasinya dengan median kohort. Outlier removal via **Isolation Forest** membuktikan data ekstrem medis merupakan sinyal patologis parah penyakit jantung yang berharga dan tidak boleh dihapus.
 
 ---
 
-## Executive Dashboard & Infographics (`index.html`)
+## Executive Dashboard (`index.html`)
 
-Repositori ini dilengkapi dengan berkas **`index.html`** yang merupakan infografis web visual premium interaktif yang berfungsi sebagai lembar ringkasan eksekutif (_Executive Summary Sheet_).
+Repositori ini dilengkapi dengan berkas **`index.html`** yang merupakan infografis web visual interaktif yang berfungsi sebagai lembar ringkasan eksekutif (_Executive Summary Sheet_).
 
 - **Desain**: Minimalis, elegan, berpusat pada kegunaan, mengadopsi bahasa desain **Apple Human Interface Guidelines (HIG)** dengan palet warna HSL premium (iOS Blue, iOS Slate, Green, Dark Grey).
 - **Fitur Visual**:
@@ -114,24 +98,24 @@ Untuk membukanya, cukup klik dua kali berkas `index.html` pada peramban (_web br
 
 ## Pemetaan Unit Kompetensi Sertifikasi (BNSP)
 
-Seluruh pengerjaan notebook pada repositori ini dirancang untuk mematuhi **Standar Kompetensi Kerja Nasional Indonesia (SKKNI)** Bidang Data Science. Berikut adalah pemetaan kode unit kompetensi ke dalam bukti pengerjaan:
+Seluruh pengerjaan notebook pada repositori ini dirancang untuk mematuhi **Standar Kompetensi Kerja Nasional Indonesia (SKKNI)** Bidang Data Science. Berikut adalah pemetaan 11 kode unit kompetensi ke dalam bukti pengerjaan:
 
-| Kode Unit Kompetensi | Judul Unit Kompetensi                 | Bukti Implementasi & Lokasi pada Notebook / Repositori                                                                                                                                                        |
-| :------------------- | :------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **J.62DMI00.001.1**  | Menentukan Objektif Bisnis            | Rincian latar belakang medis, objektif diagnosis, risiko proyek, dan penentuan metrik evaluasi medis (misal: penekanan Recall untuk meminimalkan _false negative_). Lokasi: Bab I di semua Notebook.          |
-| **J.62DMI00.002.1**  | Menentukan Tujuan Teknis Data Science | Pendefinisian tujuan teknis sebagai klasifikasi biner dan target metrik performa (Akurasi, F1-score, ROC-AUC). Lokasi: Bab I & II di semua Notebook.                                                          |
-| **J.62DMI00.005.1**  | Menelaah Data                         | Deskripsi statistik (`.describe()`, tipe data, visualisasi countplot kelas target, KDE plot sebaran usia, dan matriks korelasi heatmap). Lokasi: Bab EDA & Telaah Data.                                       |
-| **J.62DMI00.006.1**  | Memvalidasi Data                      | Analisis kualitas data, persentase data hilang (_missing values_), anomali data (nilai nol tidak logis, kolesterol nol). Lokasi: Bab Validasi Data.                                                           |
-| **J.62DMI00.007.1**  | Menentukan Objek Data                 | Pemilahan fitur klinis relevan (14 fitur dari 76 fitur pada penyakit jantung; 9 fitur utama pada diabetes). Lokasi: Bab Data Selection.                                                                       |
-| **J.62DMI00.008.1**  | Membersihkan Data                     | Implementasi pengisian data hilang menggunakan median per kohort, median bersyarat kelas (`ClassConditionalMedianImputer`), dan koreksi anomali. Lokasi: Bab Data Cleaning.                                   |
-| **J.62DMI00.009.1**  | Mengkonstruksi Data                   | Pembuatan 16 Fitur Komposit Klinis baru (Diabetes), perluasan fitur kuadratik non-linier (CKD), dan One-Hot Encoding variabel kategorikal. Lokasi: Bab Feature Engineering.                                   |
-| **J.62DMI00.012.1**  | Membangun Skenario Model              | Pengujian multi-skenario (Split-First vs Preprocess-First, Tanpa Outlier vs Isolation Forest Outlier Removal), Stratified 5-Fold Cross Validation. Lokasi: Bab Model Scenarios.                               |
-| **J.62DMI00.013.1**  | Membangun Model                       | Pelatihan 8+ algoritma klasifikasi, optimasi parameter dengan Optuna Bayesian Tuning, dan perancangan Soft-Voting Ensemble Classifier. Lokasi: Bab Modeling & Training.                                       |
-| **J.62DMI00.014.1**  | Mengevaluasi Hasil Pemodelan          | Penyusunan tabel perbandingan metrik, penggambaran kurva ROC-AUC, grafik perbandingan performa, dan Confusion Matrix (TP/TN/FP/FN). Lokasi: Bab Evaluation.                                                   |
-| **J.62DMI00.015.1**  | Melakukan Proses Review Pemodelan     | Ulasan analitik kegagalan outlier removal (Penyakit Jantung), visualisasi pentingnya fitur via koefisien (Breast Cancer), dan analisis pembuktian target leakage (Diabetes). Lokasi: Bab Review & Discussion. |
+| Kode Unit Kompetensi | Judul Unit Kompetensi | Bukti Implementasi & Lokasi pada Notebook / Repositori |
+| :--- | :--- | :--- |
+| **J.62DMI00.001.1** | Menentukan Objektif Bisnis | Formulasi objektif skrining cepat Posbindu PTM & rujukan presisi Puskesmas Kota Semarang. Penekanan Recall medis. Lokasi: `Stroke-Prediction.ipynb` & Bab I di semua Notebook. |
+| **J.62DMI00.002.1** | Menentukan Tujuan Teknis Data Science | Pendefinisian metrik evaluasi F1-Score, Recall, dan PR-AUC (menghindari jebakan akurasi naif pada imbalanced data). Lokasi: `Stroke-Prediction.ipynb` & Bab I. |
+| **J.62DMI00.005.1** | Menelaah Data | EDA 10.000 sampel rekam medis Posbindu, analisis sebaran *Class Imbalance* 29,78% kejadian stroke. Lokasi: Bab EDA. |
+| **J.62DMI00.006.1** | Memvalidasi Data | Pengujian konsistensi klinis, persentase missing BMI 2,01%, verifikasi 0 duplikasi data. Lokasi: Bab Validasi Data. |
+| **J.62DMI00.007.1** | Menentukan Objek Data | Pemisahan variabel prediktor $X$ dan target $y$, keputusan etis melakukan *drop* variabel SES (*Socioeconomic Status*). Lokasi: Bab Objek Data. |
+| **J.62DMI00.008.1** | Membersihkan Data | Imputasi median BMI terisolasi di dalam `ColumnTransformer` (terpisah aman per-fold). Lokasi: Bab Cleaning. |
+| **J.62DMI00.009.1** | Mengkonstruksi Data | Transformasi fitur numerik (`StandardScaler`) & kategorikal (`OneHotEncoder`) terbungkus aman dalam pipeline. Lokasi: Bab Feature Engineering. |
+| **J.62DMI00.012.1** | Membangun Skenario Model | **Stratified 80:20 Train-Test Split** dieksekusi di tahap awal sebelum preprocessing untuk menjamin **0% Data Leakage**. Lokasi: Bab Split Data. |
+| **J.62DMI00.013.1** | Membangun Model | Pelatihan 5 algoritma (Logistic Reg, Random Forest, XGBoost, LightGBM, MLP) via `ImbPipeline` + SMOTE + 5-Fold Stratified CV + `GridSearchCV`. Lokasi: Bab Modeling. |
+| **J.62DMI00.014.1** | Mengevaluasi Hasil Pemodelan | Evaluasi 5 model pada *test set* 2.000 sampel menggunakan 7 metrik (Accuracy, Precision, Recall, F1, PR-AUC, ROC-AUC, Brier Score). Lokasi: Bab Evaluasi. |
+| **J.62DMI00.015.1** | Melakukan Proses Review Pemodelan | Analisis *SHAP TreeExplainer* (Hipertensi & Jantung sebagai prediktor utama), audit Confusion Matrix paper acuan Tang et al. (2026), dan penyusunan rekomendasi threshold klinis Posbindu. Lokasi: Bab Review. |
 
 ---
 
 ## Lisensi
 
-Repositori ini dilisensikan di bawah **MIT License** - lihat berkas [LICENSE](LICENSE) untuk detail lebih lanjut. Seluruh dataset bersumber dari data publik UCI Machine Learning Repository dan Kaggle.
+Repositori ini dilisensikan di bawah **MIT License** - lihat berkas [LICENSE](LICENSE) untuk detail lebih lanjut. Seluruh dataset bersumber dari data publik rekam medis klinis, UCI Machine Learning Repository, dan Kaggle.
