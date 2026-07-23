@@ -13,7 +13,7 @@ Dokumentasi ini merupakan berkas master repositori untuk memenuhi syarat kelayak
 - **Program**: Workshop & Uji Sertifikasi Data Scientist
 - **Skema Sertifikasi**: Ilmuwan Data (Data Scientist)
 - **Lembaga Sertifikasi**: Badan Nasional Sertifikasi Profesi (BNSP)
-- **Tahun**: 2026
+- **Tahun**: Juli 2026
 
 ---
 
