@@ -24,17 +24,17 @@ d:/project sertifikasi/
 │
 ├── readme.md                   <- Dokumentasi master repositori & pemetaan BNSP (berkas ini)
 │
-├── stroke/                     <- Proyek Utama: Skrining Risiko Stroke Posbindu PTM Kota Semarang
+├── stroke/                     <- Proyek Uji Sertifikasi: Skrining Risiko Stroke Posbindu PTM Kota Semarang
 │   ├── stroke.csv              <- Dataset Rekam Medis Posbindu (10.000 sampel × 10 fitur)
 │   ├── Stroke-Prediction.ipynb <- Notebook Jupyter (CRISP-DM & 11 Unit SKKNI Leak-Free Pipeline)
 │   └── readme.md               <- Dokumentasi rinci proyek stroke & audit kritis jurnal Scopus Q1
 │
-├── diabetes/                   <- Proyek A: Klasifikasi Penyakit Diabetes Mellitus
+├── diabetes/                   <- Proyek Tugas Workshop: Klasifikasi Penyakit Diabetes Mellitus
 │   ├── diabetes.csv            <- Pima Indians Diabetes Dataset (768 baris × 9 kolom)
 │   ├── Diabetes_Prediction.ipynb <- Notebook Jupyter (Imputasi Bersyarat, Rekayasa Fitur, Ensemble, Optuna)
 │   └── readme.md               <- Dokumentasi rinci proyek diabetes & replikasi jurnal
 │
-└── heart_disease/              <- Proyek B: Deteksi Penyakit Jantung (UCI 4 Regional Cohort)
+└── heart_disease/              <- Proyek Latihan Workshop: Deteksi Penyakit Jantung (UCI 4 Regional Cohort)
     ├── heart.csv               <- Dataset Penyakit Jantung Cleveland, Hungarian, Swiss, VA (920 baris)
     ├── Heart_Disease.ipynb     <- Notebook Jupyter (Outlier Isolation Forest, Multiregional Imputation)
     └── readme.md               <- Dokumentasi rinci proyek jantung & pemetaan kompetensi
